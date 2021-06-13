@@ -67,10 +67,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Header = () => {
+const Header = ({history}) => {
     const classes = useStyles();
     const theme = useTheme();
-    let history = useHistory();
+    // let history = useHistory();
     const [open, setOpen] = React.useState(false);
 
     const handleDrawerOpen = () => {
@@ -83,7 +83,7 @@ const Header = () => {
 
     function isActive(history, path) {
         if (history.location.pathname === path) {
-            return {color: '#ff9900'}
+            return {color: '#ffd391'}
         } else {
             return {color: '#fff'}
         }
@@ -157,7 +157,7 @@ const Header = () => {
                     </div>
                     <Typography variant="h5" className={classes.title}>
                         <Link to="/" className={classes.linkstyle}>
-                            <FontAwesomeIcon icon={faShoppingBag} aria-hidden={true}/>  &nbsp;
+                            {/*<FontAwesomeIcon icon={faShoppingBag} aria-hidden={true}/>{' '}*/}
                             eComm
                         </Link>
                     </Typography>

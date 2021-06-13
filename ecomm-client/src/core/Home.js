@@ -1,10 +1,12 @@
 import React from 'react'
+import Layout from "./Layout";
 
 const Home = () => {
     return (
-        <>
-            <div>Home</div>
-        </>
+        <Layout title="eComm Web" description="E-commerce web platform developed using MERN stack">
+            <>
+            </>
+        </Layout>
     )
 }
 

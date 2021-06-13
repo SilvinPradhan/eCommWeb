@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const SignIn = () => {
+const SignUp = () => {
     const classes = useStyles();
     const [formData, setFormData] = useState({
         username: '',
@@ -47,6 +47,9 @@ const SignIn = () => {
         password: '',
         confirmPassword: '',
     });
+    const [value, setValue] = useState({
+        error: '', success: false
+    })
     const {username, firstName, lastName, email, password, confirmPassword} = formData;
     const change = (e) =>
         setFormData({
@@ -185,4 +188,4 @@ const SignIn = () => {
 //     isAuthenticated: PropTypes.bool,
 // };
 
-export default SignIn;
+export default SignUp;

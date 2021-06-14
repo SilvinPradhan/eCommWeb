@@ -46,16 +46,22 @@ const SignUp = () => {
         email: '',
         password: '',
         confirmPassword: '',
+        success: false,
+        error: ''
     });
-    const [value, setValue] = useState({
-        error: '', success: false
-    })
     const {username, firstName, lastName, email, password, confirmPassword} = formData;
-    const change = (e) =>
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
+    const change = (e) => {
+        try {
+            setFormData({
+                ...formData,
+                error: '',
+                [e.target.name]: e.target.value
+            });
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     const onSubmit = async (e) => {
         window.scrollTo(0, 0);
         e.preventDefault();
@@ -66,7 +72,16 @@ const SignUp = () => {
             // );
         } else {
             console.log({username, firstName, lastName, email, password});
-            // register({username, firstName, lastName, email, password});
+            setFormData({
+                ...formData,
+                firstName: '',
+                lastName: '',
+                email: '',
+                password: '',
+                confirmPassword: '',
+                success: true,
+                error: ''
+            })
 
         }
     };
@@ -176,6 +191,7 @@ const SignUp = () => {
                 </form>
                 <p className="my-1">
                     Already have an account? <Link to="/signin">Sign In</Link>
+                    {JSON.stringify(formData)}
                 </p>
             </div>
         </Container>

@@ -16,6 +16,8 @@ import {faSignInAlt, faUserPlus, faShoppingBag} from '@fortawesome/free-solid-sv
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 
+import {signout} from "../auth/user";
+
 const drawerWidth = 170;
 const useStyles = makeStyles((theme) => ({
     root: {

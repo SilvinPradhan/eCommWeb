@@ -55,3 +55,7 @@ export const signout = (next) => {
         })
     }
 }
+
+export const isAuthenticated = () => {
+
+}

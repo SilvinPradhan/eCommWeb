@@ -13,6 +13,9 @@ import {
 import {makeStyles} from '@material-ui/core/styles';
 import {authenticate, signin} from "../auth/user";
 
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const useStyles = makeStyles((theme) => ({
     root: {},
     heading: {
@@ -71,6 +74,15 @@ const SignIn = () => {
                         redirectToReferrer: true, error: '', loading: false
                     })
                 })
+                toast.success(`Welcome to eCommWeb, ${email}`, {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }
         })
     };
@@ -99,6 +111,7 @@ const SignIn = () => {
 
     return (
         <Container component="main" maxWidth="xs">
+            <ToastContainer/>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon/>

@@ -5,9 +5,13 @@ import SignIn from "../user/signin";
 import Home from "../core/Home";
 import Header from "../core/Header";
 
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Routes = () => {
     return (
         <BrowserRouter>
+            <ToastContainer/>
             <Header/>
             <Switch>
                 <Route path="/" exact component={Home}/>

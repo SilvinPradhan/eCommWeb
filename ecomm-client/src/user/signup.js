@@ -1,207 +1,101 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import {
-    Button,
-    TextField,
-    Typography,
-    Avatar,
-    Container,
-} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
+import {signup} from '../auth/user'
+import Layout from '../core/Layout';
+import {API} from "../config";
+// import { signup } from '../auth';
 
-const useStyles = makeStyles((theme) => ({
-    root: {},
-    heading: {
-        color: '#264653',
-        align: 'center',
-    },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: '#264653',
-    },
-    paper: {
-        marginTop: theme.spacing(4),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    form: {
-        width: '100%',
-        marginTop: theme.spacing(1),
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-        backgroundColor: '#264653',
-        color: '#fff'
-    },
-}));
-
-const SignUp = () => {
-    const classes = useStyles();
-    const [formData, setFormData] = useState({
+const Signup = () => {
+    const [values, setValues] = useState({
         username: '',
         firstName: '',
         lastName: '',
         email: '',
         password: '',
-        confirmPassword: '',
-        success: false,
-        error: ''
+        error: '',
+        success: false
     });
-    const {username, firstName, lastName, email, password, confirmPassword} = formData;
-    const change = (e) => {
-        try {
-            setFormData({
-                ...formData,
-                error: '',
-                [e.target.name]: e.target.value
-            });
-        } catch (err) {
-            console.log(err)
-        }
-    }
 
-    const onSubmit = async (e) => {
-        window.scrollTo(0, 0);
-        e.preventDefault();
-        if (password !== confirmPassword) {
-            // setAlert(
-            //     'password does	return <Redirect to="/"></Redirect>;ot match',
-            //     'error'
-            // );
-        } else {
-            console.log({username, firstName, lastName, email, password});
-            setFormData({
-                ...formData,
-                firstName: '',
-                lastName: '',
-                email: '',
-                password: '',
-                confirmPassword: '',
-                success: true,
-                error: ''
-            })
+    const {username, firstName, lastName, email, password, success, error} = values;
 
-        }
+    const handleChange = name => event => {
+        setValues({...values, error: '', [name]: event.target.value});
     };
-    //redirect if logged in
-    // if (isAuthenticated) {
-    //     return <Redirect to="/"></Redirect>;
-    // }
+
+
+    const clickSubmit = event => {
+        event.preventDefault();
+        setValues({...values, error: ''});
+
+        signup({username, firstName, lastName, email, password}).then(data => {
+            if (data.error) {
+                setValues({...values, error: data.error, success: false});
+            } else {
+                setValues({
+                    ...values,
+                    username: '',
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    password: '',
+                    error: '',
+                    success: true
+                });
+            }
+        });
+    };
+
+    const signUpForm = () => (
+        <form>
+            <div className="form-group">
+                <label className="text-muted">Username</label>
+                <input onChange={handleChange('username')} type="text" className="form-control" value={username}/>
+            </div>
+
+            <div className="form-group">
+                <label className="text-muted">First Name</label>
+                <input onChange={handleChange('firstName')} type="text" className="form-control" value={firstName}/>
+            </div>
+
+            <div className="form-group">
+                <label className="text-muted">Last Name</label>
+                <input onChange={handleChange('lastName')} type="text" className="form-control" value={lastName}/>
+            </div>
+
+            <div className="form-group">
+                <label className="text-muted">Email</label>
+                <input onChange={handleChange('email')} type="email" className="form-control" value={email}/>
+            </div>
+
+            <div className="form-group">
+                <label className="text-muted">Password</label>
+                <input onChange={handleChange('password')} type="password" className="form-control" value={password}/>
+            </div>
+            <button onClick={clickSubmit} className="btn btn-primary">
+                Submit
+            </button>
+        </form>
+    );
+
+    const showError = () => (
+        <div className="alert alert-danger" style={{display: error ? '' : 'none'}}>
+            {error}
+        </div>
+    );
+
+    const showSuccess = () => (
+        <div className="alert alert-info" style={{display: success ? '' : 'none'}}>
+            New account is created. Please <Link to="/signin">Signin</Link>
+        </div>
+    );
 
     return (
-        <Container component="main" maxWidth="xs">
-            <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon/>
-                </Avatar>
-                <Typography className={classes.heading}>
-                    <i className="fas fa-user"></i> Create Your Account
-                </Typography>
-
-                <form
-                    className={classes.form}
-                    onSubmit={(e) => onSubmit(e)}
-                >
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        label="Username"
-                        name="username"
-                        fullWidth
-                        autoFocus
-                        value={username}
-                        onChange={(e) => {
-                            change(e);
-                        }}
-                    ></TextField>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        label="First Name"
-                        name="firstName"
-                        fullWidth
-                        autoFocus
-                        value={firstName}
-                        onChange={(e) => {
-                            change(e);
-                        }}
-                    ></TextField>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        label="Last Name"
-                        name="lastName"
-                        fullWidth
-                        autoFocus
-                        value={lastName}
-                        onChange={(e) => {
-                            change(e);
-                        }}
-                    ></TextField>
-                    <TextField
-                        variant="outlined"
-                        fullWidth
-                        autoFocus
-                        name="email"
-                        margin="normal"
-                        label="email"
-                        value={email}
-                        onChange={(e) => {
-                            change(e);
-                        }}
-                    ></TextField>
-
-                    <TextField
-                        variant="outlined"
-                        fullWidth
-                        autoFocus
-                        name="password"
-                        margin="normal"
-                        label="password"
-                        type={'password'}
-                        value={password}
-                        onChange={(e) => {
-                            change(e);
-                        }}
-                    />
-
-                    <TextField
-                        variant="outlined"
-                        fullWidth
-                        autoFocus
-                        name="confirmPassword"
-                        margin="normal"
-                        label="confirm password"
-                        type={'password'}
-                        value={confirmPassword}
-                        onChange={(e) => {
-                            change(e);
-                        }}
-                    />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        className={classes.submit}
-                    >
-                        Register
-                    </Button>
-                </form>
-                <p className="my-1">
-                    Already have an account? <Link to="/signin">Sign In</Link>
-                    {JSON.stringify(formData)}
-                </p>
-            </div>
-        </Container>
+        <>
+            {showSuccess()}
+            {showError()}
+            {signUpForm()}
+        </>
     );
 };
 
-// SignIn.propTypes = {
-//     setAlert: PropTypes.func.isRequired,
-//     register: PropTypes.func.isRequired,
-//     isAuthenticated: PropTypes.bool,
-// };
-
-export default SignUp;
+export default Signup;

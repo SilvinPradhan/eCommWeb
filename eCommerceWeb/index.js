@@ -3,7 +3,7 @@ const path = require('path'); // allows to dynamically build when we call it fro
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
-const cors = require('express');
+const cors = require('cors');
 const expressValidator = require('express-validator')
 
 const dotenv = require('dotenv')
@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser())
 app.use(expressValidator())
-app.use(cors());
+app.use(cors())
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, 'client/build')));

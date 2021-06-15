@@ -11,6 +11,7 @@ import {
     Container,
 } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
+import {authenticate, signin} from "../auth/user";
 
 const useStyles = makeStyles((theme) => ({
     root: {},
@@ -41,24 +42,60 @@ const useStyles = makeStyles((theme) => ({
 const SignIn = () => {
     const classes = useStyles();
     const [formData, setFormData] = useState({
-        username: 'icuDummies',
+        email: 'silvinpradhan95@gmail.com',
         password: 'Invoker200695@@',
+        loading: false,
+        error: '',
+        redirectToReferrer: false
     });
-    const {username, password} = formData;
+    const {email, password, loading, error, redirectToReferrer} = formData;
     const change = (e) =>
         setFormData({
-            ...formData,
+            ...formData, error: '',
             [e.target.name]: e.target.value,
         });
     const onSubmit = async (e) => {
         e.preventDefault();
-        console.log({username, password});
-        // login({ email, password });
+        console.log({email, password});
+        setFormData({...formData, error: '', loading: true})
+        signin({email, password}).then(data => {
+            if (data.error) {
+                setFormData({
+                    ...formData, error: data.error,
+                    loading: false
+                })
+            } else {
+                authenticate(data, () => {
+                    setFormData({
+                        ...formData,
+                        redirectToReferrer: true, error: '', loading: false
+                    })
+                })
+            }
+        })
     };
     //redirect if logged in
     // if (isAuthenticated) {
     //     return <Redirect to="/"></Redirect>;
     // }
+
+    const showError = () => (
+        <div style={{display: error ? '' : 'none'}}>
+            {error}
+        </div>
+    )
+
+    const showLoading = () => (
+        loading && <div>
+            <h2> Loading...</h2>
+        </div>
+    )
+
+    const redirectUser = () => {
+        if (redirectToReferrer) {
+            return <Redirect to={'/'}/>
+        }
+    }
 
     return (
         <Container component="main" maxWidth="xs">
@@ -79,8 +116,8 @@ const SignIn = () => {
                         label="username"
                         fullWidth
                         autoFocus
-                        name="username"
-                        value={username}
+                        name="email"
+                        value={email}
                         onChange={(e) => {
                             change(e);
                         }}
@@ -114,6 +151,11 @@ const SignIn = () => {
                     Don't have an account? <Link to="/signup">Register</Link>
                 </Typography>
             </div>
+            {showLoading()}
+            {
+                showError()
+            }
+            {redirectUser()}
         </Container>
     );
 };

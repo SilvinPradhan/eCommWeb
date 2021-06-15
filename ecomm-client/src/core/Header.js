@@ -164,7 +164,7 @@ const Header = ({history}) => {
                     <div className={classes.sectionDesktop}>
                         <Typography className={classes.menuText}>
                             <Link to="/questions" className={classes.linkstyle}>
-                                <i class="fa fa-book" aria-hidden="true"></i>
+                                <i className="fa fa-book" aria-hidden="true"></i>
                                 <span>Explore</span>{' '}
                             </Link>
                         </Typography>
@@ -227,7 +227,7 @@ const Header = ({history}) => {
                             <ListItem button>
                                 <Typography className={classes.menuText}>
                                     <Link to="/questions" className={classes.linkstyle}>
-                                        <i class="fa fa-book" aria-hidden="true"></i>
+                                        <i className="fa fa-book" aria-hidden="true"></i>
                                         <span>Explore</span>{' '}
                                     </Link>
                                 </Typography>
@@ -259,7 +259,7 @@ const Header = ({history}) => {
                 <div className={classes.sectionDesktop}>
                     <Typography className={classes.menuText}>
                         <Link to="/questions" className={classes.linkstyle}>
-                            <i class="fa fa-book" aria-hidden="true"></i>
+                            <i className="fa fa-book" aria-hidden="true"></i>
                             <span>Explore</span>{' '}
                         </Link>
                     </Typography>

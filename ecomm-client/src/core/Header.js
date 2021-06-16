@@ -16,7 +16,7 @@ import {faSignInAlt, faUserPlus, faShoppingBag} from '@fortawesome/free-solid-sv
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 
-import {signout} from "../auth/user";
+import {signout, isAuthenticated} from "../auth/user";
 
 const drawerWidth = 170;
 const useStyles = makeStyles((theme) => ({
@@ -243,10 +243,10 @@ const Header = ({history}) => {
                             </ListItem>
                             <ListItem button>
                                 <Typography className={classes.menuText}>
-                                    <a href="/" className={classes.linkstyle}>
-                                        <i className="fa fa-sign-out-alt"> </i>
-                                        {'  '} <span>Sign Out</span>
-                                    </a>
+                                         <span style={{cursor: "pointer"}} className={classes.linkstyle}
+                                               onClick={() => signout(() => {
+                                                   history.push('/')
+                                               })}>Sign Out</span>
                                 </Typography>
                             </ListItem>
                         </List>
@@ -270,24 +270,21 @@ const Header = ({history}) => {
                     </Typography>
 
                     <Typography className={classes.menuText}>
-                        <a href="/" className={classes.linkstyle}>
-                            <i className="fa fa-sign-out-alt"> </i>
-                            {'  '} <span>Sign Out</span>
-                        </a>
+                         <span style={{cursor: "pointer"}} className={classes.linkstyle}
+                               onClick={() => signout(() => {
+                                   history.push('/')
+                               })}>Sign Out</span>
                     </Typography>
                 </div>
             </Toolbar>
         </AppBar>
     );
 
-    // if (isAuthenticated && !loading) {
-    //     return <Fragment>{authlink}</Fragment>;
-    // } else {
-    //     return <Fragment> {guestLink}</Fragment>;
-    // }
-    return <>
-        {guestLink}
-    </>
+    if (isAuthenticated()) {
+        return <>{authlink}</>;
+    } else {
+        return <> {guestLink}</>;
+    }
 };
 Header.propTypes = {
     // logout: PropTypes.func.isRequired,

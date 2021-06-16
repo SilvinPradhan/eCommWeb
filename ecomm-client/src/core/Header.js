@@ -12,7 +12,7 @@ import Divider from '@material-ui/core/Divider';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faSignInAlt, faUserPlus, faShoppingBag} from '@fortawesome/free-solid-svg-icons'
+import {faSignInAlt, faUserPlus, faShoppingBag, faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 
@@ -236,17 +236,22 @@ const Header = ({history}) => {
                             </ListItem>
                             <ListItem button>
                                 <Typography className={classes.menuText}>
-                                    <Typography className={classes.menuText}>
-                                        {/*    Profile goes here*/}
-                                    </Typography>
+                                    <Link to="/dashboard" className={classes.linkstyle}
+                                          style={isActive(history, '/dashboard')}>
+                                        {' '}
+                                        <FontAwesomeIcon icon={faUserPlus} aria-hidden={true}/>  &nbsp;
+                                        <span>Dashboard</span>{' '}
+                                    </Link>
                                 </Typography>
                             </ListItem>
                             <ListItem button>
                                 <Typography className={classes.menuText}>
-                                         <span style={{cursor: "pointer"}} className={classes.linkstyle}
-                                               onClick={() => signout(() => {
-                                                   history.push('/')
-                                               })}>Sign Out</span>
+                                    <FontAwesomeIcon icon={faSignOutAlt} aria-hidden={true}/>  &nbsp;
+                                    {' '}
+                                    <span style={{cursor: "pointer"}} className={classes.linkstyle}
+                                          onClick={() => signout(() => {
+                                              history.push('/')
+                                          })}>Sign Out</span>
                                 </Typography>
                             </ListItem>
                         </List>
@@ -266,14 +271,20 @@ const Header = ({history}) => {
                         </Link>
                     </Typography>
                     <Typography className={classes.menuText}>
-                        {/*<Profile></Profile>*/}
+                        <Link to="/dashboard" className={classes.linkstyle}
+                              style={isActive(history, '/dashboard')}>
+                            {' '}
+                            <FontAwesomeIcon icon={faUserPlus} aria-hidden={true}/>  &nbsp;
+                            <span>Dashboard</span>{' '}
+                        </Link>
                     </Typography>
-
                     <Typography className={classes.menuText}>
-                         <span style={{cursor: "pointer"}} className={classes.linkstyle}
-                               onClick={() => signout(() => {
-                                   history.push('/')
-                               })}>Sign Out</span>
+                        <FontAwesomeIcon icon={faSignOutAlt} aria-hidden={true}/>  &nbsp;
+                        {' '}
+                        <span style={{cursor: "pointer"}} className={classes.linkstyle}
+                              onClick={() => signout(() => {
+                                  history.push('/')
+                              })}>Sign Out</span>
                     </Typography>
                 </div>
             </Toolbar>

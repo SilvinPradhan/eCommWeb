@@ -11,7 +11,7 @@ import {
     Container,
 } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
-import {authenticate, signin} from "../auth/user";
+import {authenticate, signin, isAuthenticated} from "../auth/user";
 
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -52,6 +52,7 @@ const SignIn = () => {
         redirectToReferrer: false
     });
     const {email, password, loading, error, redirectToReferrer} = formData;
+    const {user} = isAuthenticated()
     const change = (e) =>
         setFormData({
             ...formData, error: '',
@@ -105,7 +106,11 @@ const SignIn = () => {
 
     const redirectUser = () => {
         if (redirectToReferrer) {
-            return <Redirect to={'/'}/>
+            if (user && user.role === 1) {
+                return <Redirect to="/admin/dashboard"/>
+            } else {
+                return <Redirect to="/user/dashboard"/>
+            }
         }
     }
 

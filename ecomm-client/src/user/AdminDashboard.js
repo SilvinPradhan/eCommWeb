@@ -20,31 +20,31 @@ const styles = theme => ({
     },
 });
 
-const UserDashboard = (props) => {
+const AdminDashboard = (props) => {
 
     const {classes} = props;
 
     const {user: {_id, username, email, role}} = isAuthenticated();
-    const userLinks = () => {
+    const adminLinks = () => {
         return (
             <div className="card">
-                <h3 className="card-header">User Links</h3>
+                <h3 className="card-header">Admin Links</h3>
                 <ul className="list-group">
                     <li className="list-group-item">
-                        <Link className={"nav-link"} to="/cart">Cart</Link>
+                        <Link className={"nav-link"} to="/create/category">Create Category</Link>
                     </li>
                     <li className="list-group-item">
-                        <Link className={"nav-link"} to="/profile/update">Update profile</Link>
+                        <Link className={"nav-link"} to="/create/product">Create Product</Link>
                     </li>
                 </ul>
             </div>
         )
     }
 
-    const userInfo = () => {
+    const adminInfo = () => {
         return (
             <div className="card mb-5">
-                <h3 className="card-header">User Information</h3>
+                <h3 className="card-header">Admin Information</h3>
                 <ul className="list-group">
                     <li className="list-group-item">
                         <span style={{fontSize: '16px', fontWeight: "bold"}}>Name: </span> {username}
@@ -63,23 +63,6 @@ const UserDashboard = (props) => {
         )
     }
 
-    const purchaseHistory = () => {
-        return (
-            <div className="container mt-3">
-                <div className="card mb-5">
-                    <h3 className="card-header">Purchase History</h3>
-                    <ul className="list-group">
-                        <li className="list-group-item">
-                            <span style={{
-                                fontSize: '16px',
-                                fontWeight: "bold"
-                            }}>History</span></li>
-                    </ul>
-                </div>
-            </div>
-        )
-    }
-
     return (
         <div className="container mt-3">
             <Paper
@@ -92,15 +75,14 @@ const UserDashboard = (props) => {
             </Paper>
             <div className="row mt-4">
                 <div className="col-3">
-                    {userLinks()}
+                    {adminLinks()}
                 </div>
                 <div className="col-9">
-                    {userInfo()}
-                    {purchaseHistory()}
+                    {adminInfo()}
                 </div>
             </div>
         </div>
     )
 }
 
-export default withStyles(styles)(UserDashboard);
+export default withStyles(styles)(AdminDashboard);

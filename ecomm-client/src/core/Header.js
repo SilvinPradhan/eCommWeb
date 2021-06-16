@@ -236,8 +236,8 @@ const Header = ({history}) => {
                             </ListItem>
                             <ListItem button>
                                 <Typography className={classes.menuText}>
-                                    <Link to="/dashboard" className={classes.linkstyle}
-                                          style={isActive(history, '/dashboard')}>
+                                    <Link to="/user/dashboard" className={classes.linkstyle}
+                                          style={isActive(history, '/user/dashboard')}>
                                         {' '}
                                         <FontAwesomeIcon icon={faUserPlus} aria-hidden={true}/>  &nbsp;
                                         <span>Dashboard</span>{' '}
@@ -271,8 +271,8 @@ const Header = ({history}) => {
                         </Link>
                     </Typography>
                     <Typography className={classes.menuText}>
-                        <Link to="/dashboard" className={classes.linkstyle}
-                              style={isActive(history, '/dashboard')}>
+                        <Link to="/user/dashboard" className={classes.linkstyle}
+                              style={isActive(history, '/user/dashboard')}>
                             {' '}
                             <FontAwesomeIcon icon={faUserPlus} aria-hidden={true}/>  &nbsp;
                             <span>Dashboard</span>{' '}

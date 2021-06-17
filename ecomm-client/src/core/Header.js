@@ -72,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
 const Header = ({history}) => {
     const classes = useStyles();
     const theme = useTheme();
+
     // let history = useHistory();
     const [open, setOpen] = React.useState(false);
 
@@ -234,9 +235,10 @@ const Header = ({history}) => {
                                     </Link>
                                 </Typography>
                             </ListItem>
-                            <ListItem button>
-                                {
-                                    isAuthenticated().user.role === 0 && (
+
+                            {
+                                isAuthenticated() && isAuthenticated().user.role === 0 && (
+                                    <ListItem button>
                                         <Typography className={classes.menuText}>
                                             <Link to="/user/dashboard" className={classes.linkstyle}
                                                   style={isActive(history, '/user/dashboard')}>
@@ -245,21 +247,20 @@ const Header = ({history}) => {
                                                 <span>Dashboard</span>{' '}
                                             </Link>
                                         </Typography>
-                                    )
-                                }{
-                                isAuthenticated().user.role === 1 && (
-                                    <Typography className={classes.menuText}>
-                                        <Link to="/admin/dashboard" className={classes.linkstyle}
-                                              style={isActive(history, '/admin/dashboard')}>
-                                            {' '}
-                                            <FontAwesomeIcon icon={faUserPlus} aria-hidden={true}/>  &nbsp;
-                                            <span>Dashboard</span>{' '}
-                                        </Link>
-                                    </Typography>
+                                    </ListItem>
                                 )
-                            }
-
-                            </ListItem>
+                            }{
+                            isAuthenticated() && isAuthenticated().user.role === 1 && (
+                                <Typography className={classes.menuText}>
+                                    <Link to="/admin/dashboard" className={classes.linkstyle}
+                                          style={isActive(history, '/admin/dashboard')}>
+                                        {' '}
+                                        <FontAwesomeIcon icon={faUserPlus} aria-hidden={true}/>  &nbsp;
+                                        <span>Dashboard</span>{' '}
+                                    </Link>
+                                </Typography>
+                            )
+                        }
                             <ListItem button>
                                 <Typography className={classes.menuText}>
                                     <FontAwesomeIcon icon={faSignOutAlt} aria-hidden={true}/>  &nbsp;

@@ -8,7 +8,9 @@ import Header from "../core/Header";
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoute from "../auth/PrivateRoute";
+import AdminRoute from "../auth/AdminRoute";
 import UserDashboard from "../user/UserDashboard";
+import AdminDashboard from "../user/AdminDashboard";
 
 const Routes = () => {
     return (
@@ -20,6 +22,7 @@ const Routes = () => {
                 <Route path="/signin" exact component={SignIn}/>
                 <Route path="/signup" exact component={SignUp}/>
                 <PrivateRoute path={"/user/dashboard"} exact component={UserDashboard}/>
+                <AdminRoute path={"/admin/dashboard"} exact component={AdminDashboard}/>
             </Switch>
         </BrowserRouter>
     )

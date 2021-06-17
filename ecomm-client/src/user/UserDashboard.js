@@ -6,6 +6,10 @@ import {Link} from "react-router-dom"
 import {Paper} from "@material-ui/core";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUserEdit, faUserTie} from "@fortawesome/free-solid-svg-icons";
+import {faShoppingCart} from "@fortawesome/free-solid-svg-icons/faShoppingCart";
+import {faUserCheck} from "@fortawesome/free-solid-svg-icons/faUserCheck";
+import {faEnvelope} from "@fortawesome/free-solid-svg-icons/faEnvelope";
+import {faUserLock} from "@fortawesome/free-solid-svg-icons/faUserLock";
 
 const styles = theme => ({
     root: {},
@@ -31,10 +35,14 @@ const UserDashboard = (props) => {
                 <h3 className="card-header">User Links</h3>
                 <ul className="list-group">
                     <li className="list-group-item">
-                        <Link className={"nav-link"} to="/cart">Cart</Link>
+                        <Link className={"nav-link"} to="/cart">
+                            <FontAwesomeIcon icon={faShoppingCart} aria-hidden={true}/>
+                            Cart</Link>
                     </li>
                     <li className="list-group-item">
-                        <Link className={"nav-link"} to="/profile/update">Update profile</Link>
+                        <Link className={"nav-link"} to="/profile/update">
+                            <FontAwesomeIcon icon={faUserEdit} aria-hidden={true}/>
+                            Update profile</Link>
                     </li>
                 </ul>
             </div>
@@ -47,16 +55,20 @@ const UserDashboard = (props) => {
                 <h3 className="card-header">User Information</h3>
                 <ul className="list-group">
                     <li className="list-group-item">
-                        <span style={{fontSize: '16px', fontWeight: "bold"}}>Name: </span> {username}
+                        <span
+                            style={{fontSize: '16px', fontWeight: "bold"}}><FontAwesomeIcon icon={faUserCheck}
+                                                                                            aria-hidden={true}/>
+                            Name: </span> {username}
                     </li>
                     <li className="list-group-item">
-                        <span style={{fontSize: '16px', fontWeight: "bold"}}>Email: </span>{email}
+                        <span style={{fontSize: '16px', fontWeight: "bold"}}><FontAwesomeIcon icon={faEnvelope}/> Email: </span>{email}
                     </li>
                     <li className="list-group-item">
                             <span style={{
                                 fontSize: '16px',
                                 fontWeight: "bold"
-                            }}>Role : </span>{role === 1 ? 'Admin' : 'Registered user'}
+                            }}><FontAwesomeIcon
+                                icon={faUserLock}/>Role : </span>{role === 1 ? 'Admin' : 'Registered user'}
                     </li>
                 </ul>
             </div>

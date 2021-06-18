@@ -9,12 +9,12 @@ import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        minWidth: 275,
-    },
+    // root: {
+    //     minWidth: 275,
+    // },
     form: {
-        width: '60%',
-        marginTop: theme.spacing(3),
+        width: '50%',
+        marginTop: theme.spacing(1),
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
@@ -23,7 +23,13 @@ const useStyles = makeStyles((theme) => ({
     title: {
         fontSize: 14,
     },
-
+    container: {
+        backgroundImage: `url(${BG})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        height: "100%"
+    }
 }));
 
 const AddCategory = () => {
@@ -46,51 +52,53 @@ const AddCategory = () => {
         setName(e.target.value)
     }
     const NewCategoryForm = () => (
-        <form
-            className={classes.form}
-            onSubmit={(e) => onSubmit(e)}
-        >
-            <Card className={classes.root} variant="outlined">
-                <CardContent>
-                    <Typography variant="h5" component="h2">
-                        <i className="fas fa-user"></i> Add a Category.
-                    </Typography>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        <span>Good Day, <b>{user.username}</b>, ready to create a new category?</span>
-                    </Typography>
-                </CardContent>
-            </Card>
-
-            <TextField
-                variant="outlined"
-                margin="normal"
-                label="category"
-                fullWidth
-                autoFocus
-                name="New"
-                value={name}
-                onChange={(e) => {
-                    change(e);
-                }}
-            ></TextField>
-
-            <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
+        <Container maxWidth="xl">
+            <form
+                className={classes.form}
+                onSubmit={(e) => onSubmit(e)}
             >
-                Create
-            </Button>
-        </form>
+                <Card className={classes.root} variant="outlined">
+                    <CardContent>
+                        <Typography variant="h5" component="h2">
+                            <i className="fas fa-user"></i> Add a Category.
+                        </Typography>
+                        <Typography className={classes.title} color="textSecondary" gutterBottom>
+                            <span>Good Day, <b>{user.username}</b>, ready to create a new category?</span>
+                        </Typography>
+                    </CardContent>
+                </Card>
+
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    label="category"
+                    fullWidth
+                    autoFocus
+                    name="New"
+                    value={name}
+                    onChange={(e) => {
+                        change(e);
+                    }}
+                ></TextField>
+
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                >
+                    Create
+                </Button>
+            </form>
+        </Container>
     )
     return (
-        <>
+        <div className={classes.container}>
             <div className="row">
-                <div className="">{NewCategoryForm()}</div>
+                <div className="col-md-8 offset-md-4">{NewCategoryForm()}</div>
             </div>
-        </>
+        </div>
     )
 }
 

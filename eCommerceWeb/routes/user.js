@@ -1,17 +1,16 @@
 const express = require('express');
 const router = express.Router()
 
-const {signup, signin, signout, requireSignIn} = require('../controllers/user')
+const {requireSignIn, isAuth, isAdmin} = require("../controllers/auth")
 
-const {userSignUpValidator} = require('../validator')
+const {userById} = require("../controllers/user")
 
-router.post('/signup', userSignUpValidator, signup);
-router.post('/signin', signin);
-router.get('/signout', signout)
-
-//API for RequireSignIn endpoint passed
-router.get('/test', requireSignIn, (req, res) => {
-    res.send('Testing user sign in "required" end point')
+router.get('/secret/:userId', requireSignIn, isAuth, isAdmin, (req, res) => {
+    res.json({
+        user: req.profile
+    })
 })
+
+router.param('userId', userById)
 
 module.exports = router;

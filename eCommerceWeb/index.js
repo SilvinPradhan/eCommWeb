@@ -12,6 +12,7 @@ if (process.env.NODE_ENV === "development") dotenv.config();
 const mongoose = require('mongoose');
 
 // Import Routes
+const authRoutes = require('./routes/auth')
 const userRoutes = require('./routes/user')
 
 // APP
@@ -47,6 +48,7 @@ mongoose.connection.on('error', err => {
 });
 
 // Routes middleware
+app.use('/api', authRoutes);
 app.use('/api', userRoutes);
 
 app.get('/', (req, res) => {

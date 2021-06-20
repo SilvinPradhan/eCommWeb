@@ -15,6 +15,7 @@ const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth')
 const userRoutes = require('./routes/user')
 const categoryRoutes = require('./routes/category')
+const productRoutes = require('./routes/product')
 
 // APP
 const app = express();
@@ -52,6 +53,7 @@ mongoose.connection.on('error', err => {
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);
 app.use('/api', categoryRoutes);
+app.use('/api', productRoutes);
 
 app.get('/', (req, res) => {
     res.json({message: 'You just hit the End Point'});

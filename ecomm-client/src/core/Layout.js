@@ -5,14 +5,11 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Logo from '../static/images/cards/homepage.png'
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
-    root: {
-        flex: 1,
-    },
+    root: {},
     media: {
         height: 360,
     },

@@ -2,7 +2,6 @@ import React from 'react';
 import {useTheme} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import {Link, withRouter, useHistory} from 'react-router-dom';
-import PropTypes from 'prop-types';
 import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -277,7 +276,7 @@ const Header = ({history}) => {
                 </div>
                 <Typography className={classes.title} variant="h5" noWrap>
                     <Link to="/" className={classes.linkstyle}>
-                        <i className="fas fa-users"></i> Collab
+                        <i className="fas fa-users"></i> eComm
                     </Link>
                 </Typography>
                 <div className={classes.sectionDesktop}>

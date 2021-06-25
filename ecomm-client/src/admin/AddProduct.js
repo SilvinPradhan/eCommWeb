@@ -1,16 +1,19 @@
 import React, {useState, useEffect} from 'react'
 import {isAuthenticated} from "../auth/user"
 import {Link} from 'react-router-dom'
-import {Avatar, Button, Container, TextField} from "@material-ui/core";
+import {
+    Avatar,
+    Card,
+} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
-import Layout from "../core/Layout";
 import {createProduct} from './apiAdmin'
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faArrowLeft} from "@fortawesome/free-solid-svg-icons/faArrowLeft";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
+import {CloudUpload} from "@material-ui/icons";
+import {faFileUpload, faPlusCircle} from "@fortawesome/free-solid-svg-icons";
+import CardContent from "@material-ui/core/CardContent";
 
 const useStyles = makeStyles((theme) => ({
     root: {},
@@ -19,12 +22,15 @@ const useStyles = makeStyles((theme) => ({
         align: 'center',
     },
     avatar: {
-        margin: theme.spacing(1),
+        margin: '5px auto',
+        alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: '#264653',
     },
     paper: {
         marginTop: theme.spacing(8),
         display: 'flex',
+        justifyContent: 'center',
         flexDirection: 'column',
         alignItems: 'center',
     },
@@ -41,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: 'none',
         color: '#ffffff'
     },
+    button: {
+        margin: theme.spacing(1),
+    },
     container: {
         minHeight: '300px'
     }
@@ -51,7 +60,7 @@ const AddProduct = () => {
     const classes = useStyles();
 
     const {user, token} = isAuthenticated()
-    const [value, setValue] = useState({
+    const [values, setValues] = useState({
         name: '',
         description: '',
         price: '',
@@ -81,90 +90,93 @@ const AddProduct = () => {
         createdProduct,
         redirectToProfile,
         formData
-    } = value
+    } = values
 
-    const change = (e) => {
+    useEffect(() => {
+        setValues({
+            ...values, formData: new FormData()
+        })
+    }, [])
 
+    const change = (name) => event => {
+        const value = name === 'photo' ? event.target.files[0] : event.target.value
+        formData.set(name, value)
+        setValues({...values, [name]: value})
     }
 
     const onSubmit = (e) => {
 
     }
 
-    const NewProductForm = () => (
-        <>
-            <Container component="main" maxWidth="xs">
-                <div className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon/>
-                    </Avatar>
-                    <Typography className={classes.heading}>
-                        <i className="fas fa-user"></i> Create Your Account
-                    </Typography>
+    const newPostForm = () => (
+        <form className="mb-3" onSubmit={onSubmit}>
+            <div className="form-group">
+                <Avatar className={classes.avatar}>
+                    <FontAwesomeIcon icon={faPlusCircle}/>
+                </Avatar>
+            </div>
+            <div className="form-group">
+                <label className="btn btn-secondary">
+                    <CloudUpload/> {'  '}
+                    <input onChange={change('photo')} type="file" name="photo" accept="image/*"/>
+                </label>
+            </div>
 
-                    <form
-                        className={classes.form}
-                        onSubmit={(e) => onSubmit(e)}
-                    >
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            label="name"
-                            name="name"
-                            fullWidth
-                            autoFocus
-                            value={name}
-                            onChange={(e) => {
-                                change(e);
-                            }}
-                        ></TextField>
-                        <TextField
-                            variant="outlined"
-                            fullWidth
-                            autoFocus
-                            name="description"
-                            margin="normal"
-                            label="Description"
-                            value={description}
-                            onChange={(e) => {
-                                change(e);
-                            }}
-                        ></TextField>
+            <div className="form-group">
+                <label className="text-muted">Name</label>
+                <input onChange={change('name')} type="text" className="form-control" value={name}/>
+            </div>
 
-                        <TextField
-                            variant="outlined"
-                            fullWidth
-                            autoFocus
-                            type="number"
-                            name="price"
-                            margin="normal"
-                            label="Price"
-                            value={price}
-                            onChange={(e) => {
-                                change(e);
-                            }}
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            className={classes.submit}
-                        >
-                            Register
-                        </Button>
-                    </form>
-                </div>
-            </Container>
-        </>
-    )
+            <div className="form-group">
+                <label className="text-muted">Description</label>
+                <textarea onChange={change('description')} className="form-control" value={description}/>
+            </div>
+
+            <div className="form-group">
+                <label className="text-muted">Price</label>
+                <input onChange={change('price')} type="number" className="form-control" value={price}/>
+            </div>
+
+            <div className="form-group">
+                <label className="text-muted">Category</label>
+                <select onChange={change('category')} className="form-control">
+                    <option>Please select</option>
+                </select>
+            </div>
+
+            <div className="form-group">
+                <label className="text-muted">Shipping</label>
+                <select onChange={change('shipping')} className="form-control">
+                    <option>Please select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div className="form-group">
+                <label className="text-muted">Quantity</label>
+                <input onChange={change('quantity')} type="number" className="form-control" value={quantity}/>
+            </div>
+
+            <button className="btn btn-outline-primary">Create Product</button>
+        </form>
+    );
 
     return (
-        <div className={classes.container}>
+        <div>
             <ToastContainer/>
-            <Layout title={"Create New Product"}
-                    description="Good Day, ready to create a new product?"/>
+            <Card>
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        Create Product
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        Good Day, ready to create a new product today?
+                    </Typography>
+                </CardContent>
+            </Card>
             <div className="row">
-                <div className="col-md-8 offset-md-4">{NewProductForm()}</div>
+                <div className="container h-100 d-flex justify-content-center">{newPostForm()}</div>
                 <div>
                     {/*{returnBack()}*/}
                 </div>

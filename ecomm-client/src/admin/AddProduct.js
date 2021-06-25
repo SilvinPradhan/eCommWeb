@@ -59,7 +59,6 @@ const AddProduct = () => {
 
     const classes = useStyles();
 
-    const {user, token} = isAuthenticated()
     const [values, setValues] = useState({
         name: '',
         description: '',
@@ -75,6 +74,8 @@ const AddProduct = () => {
         redirectToProfile: '',
         formData: ''
     })
+
+    const {user, token} = isAuthenticated()
 
     const {
         name,
@@ -105,7 +106,24 @@ const AddProduct = () => {
     }
 
     const onSubmit = (e) => {
-
+        e.preventDefault()
+        setValues({...values, error: '', loading: true})
+        createProduct(user._id, token, formData).then(data => {
+            if (data.error) {
+                setValues({...values, error: data.error})
+            } else {
+                setValues({
+                    ...values,
+                    name: '',
+                    description: '',
+                    photo: '',
+                    price: '',
+                    quantity: '',
+                    loading: false,
+                    createdProduct: data.name
+                })
+            }
+        })
     }
 
     const newPostForm = () => (
@@ -140,7 +158,8 @@ const AddProduct = () => {
             <div className="form-group">
                 <label className="text-muted">Category</label>
                 <select onChange={change('category')} className="form-control">
-                    <option>Please select</option>
+                    <option value="60d134a5f9760b1ba257ed57">Shoe</option>
+                    <option value="60d134a5f9760b1ba257ed57">Kite</option>
                 </select>
             </div>
 

@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import {Button} from "@material-ui/core";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCartPlus} from "@fortawesome/free-solid-svg-icons/faCartPlus";
+import ShowImage from "./ShowImage";
 
 const Card = ({product}) => {
     return (
@@ -12,8 +13,9 @@ const Card = ({product}) => {
                     {product.name}
                 </div>
                 <div className="card-body">
+                    <ShowImage item={product} url="products"/>
                     <p>{product.description}</p>
-                    <p>{product.price}</p>
+                    <p>$ {product.price}</p>
                     <Link to={"/"}>
                         <Button variant="contained" color="secondary">View Product</Button>
                     </Link>

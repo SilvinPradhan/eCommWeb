@@ -38,19 +38,25 @@ const Home = () => {
     return (
         <>
             <Layout title="eComm Web" description="E-commerce web platform developed using MERN stack"/>
-
-            <h2 className="mb-4"> Popular Now</h2>
-            {
-                productsBySell.map((product, i) => (
-                    <Card key={i} product={product}></Card>
-                ))
-            }
-            <hr/>
-            {
-                productsByArrival.map((product, i) => (
-                    <Card key={i} product={product}></Card>
-                ))
-            }
+            <div className="container-fluid mt-2">
+                <h2 className="mb-4"> Popular Now</h2>
+                <div className="row">
+                    {
+                        productsBySell.map((product, i) => (
+                            <Card key={i} product={product}></Card>
+                        ))
+                    }
+                </div>
+                <hr/>
+                <h2 className="mb-4">New Arrival</h2>
+                <div className="row">
+                    {
+                        productsByArrival.map((product, i) => (
+                            <Card key={i} product={product}></Card>
+                        ))
+                    }
+                </div>
+            </div>
         </>
 
     )

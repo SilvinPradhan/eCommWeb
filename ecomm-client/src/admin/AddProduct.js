@@ -6,13 +6,13 @@ import {
     Card,
 } from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
-import {createProduct} from './apiAdmin'
+import {createProduct, getCategories} from './apiAdmin'
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import Typography from "@material-ui/core/Typography";
 import {CloudUpload} from "@material-ui/icons";
-import {faFileUpload, faPlusCircle} from "@fortawesome/free-solid-svg-icons";
+import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
 import CardContent from "@material-ui/core/CardContent";
 
 const useStyles = makeStyles((theme) => ({
@@ -93,10 +93,27 @@ const AddProduct = () => {
         formData
     } = values
 
-    useEffect(() => {
-        setValues({
-            ...values, formData: new FormData()
+    const init = () => {
+        getCategories().then(data => {
+            if (data.error) {
+                setValues({...values, error: data.error})
+                toast.error('Categories has not been fetched!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            } else {
+                setValues({...values, error: '', categories: data, formData: new FormData()})
+            }
         })
+    }
+
+    useEffect(() => {
+        init()
     }, [])
 
     const change = (name) => event => {

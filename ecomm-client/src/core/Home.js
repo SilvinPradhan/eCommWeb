@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import Layout from "./Layout";
 import {getProducts} from "./apiCore";
+import Card from './cards/Card'
 
 const Home = () => {
-    const [productsBySell, setProductsBySell] = useState()
-    const [productsByArrival, setProductsByArrival] = useState()
+    const [productsBySell, setProductsBySell] = useState([])
+    const [productsByArrival, setProductsByArrival] = useState([])
     const [error, setError] = useState()
 
     const loadProductBySell = () => {
@@ -38,14 +39,18 @@ const Home = () => {
         <>
             <Layout title="eComm Web" description="E-commerce web platform developed using MERN stack"/>
 
+            <h2 className="mb-4"> Popular Now</h2>
             {
-                JSON.stringify(productsByArrival)
+                productsBySell.map((product, i) => (
+                    <Card key={i} product={product}></Card>
+                ))
             }
             <hr/>
             {
-                JSON.stringify(productsBySell)
+                productsByArrival.map((product, i) => (
+                    <Card key={i} product={product}></Card>
+                ))
             }
-
         </>
 
     )

@@ -127,7 +127,16 @@ const AddProduct = () => {
         setValues({...values, error: '', loading: true})
         createProduct(user._id, token, formData).then(data => {
             if (data.error) {
-                setValues({...values, error: data.error})
+                setValues({...values, error: data.error});
+                toast.error('Product could not created. Check your internet connection!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             } else {
                 setValues({
                     ...values,
@@ -139,9 +148,24 @@ const AddProduct = () => {
                     loading: false,
                     createdProduct: data.name
                 })
+                toast.success(`New Product, ' ${createdProduct} ' has been created!`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }
         })
     }
+
+    const showLoading = () =>
+        (loading && (<div className="alert alert-success">
+                <h2>Loading</h2>
+            </div>)
+        )
 
     const newPostForm = () => (
         <form className="mb-3" onSubmit={onSubmit}>
@@ -175,15 +199,21 @@ const AddProduct = () => {
             <div className="form-group">
                 <label className="text-muted">Category</label>
                 <select onChange={change('category')} className="form-control">
-                    <option value="60d134a5f9760b1ba257ed57">Shoe</option>
-                    <option value="60d134a5f9760b1ba257ed57">Kite</option>
+                    <option>Please Select One</option>
+                    {
+                        categories && categories.map((c, i) => (
+                            <option key={i} value={c._id}>
+                                {c.name}
+                            </option>
+                        ))
+                    }
                 </select>
             </div>
 
             <div className="form-group">
                 <label className="text-muted">Shipping</label>
                 <select onChange={change('shipping')} className="form-control">
-                    <option>Please select</option>
+                    <option>Select</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
@@ -213,9 +243,9 @@ const AddProduct = () => {
             </Card>
             <div className="row">
                 <div className="container h-100 d-flex justify-content-center">{newPostForm()}</div>
-                <div>
-                    {/*{returnBack()}*/}
-                </div>
+                {
+                    showLoading()
+                }
             </div>
         </div>
     )

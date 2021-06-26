@@ -242,10 +242,14 @@ const AddProduct = () => {
                 </CardContent>
             </Card>
             <div className="row">
-                <div className="container h-100 d-flex justify-content-center">{newPostForm()}</div>
-                {
-                    showLoading()
-                }
+                <div className="container h-100 d-flex justify-content-center">
+                    {
+                        newPostForm()
+                    }
+                    {
+                        showLoading()
+                    }</div>
+
             </div>
         </div>
     )

@@ -14,6 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import {CloudUpload} from "@material-ui/icons";
 import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
 import CardContent from "@material-ui/core/CardContent";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
     root: {},
@@ -148,24 +149,21 @@ const AddProduct = () => {
                     loading: false,
                     createdProduct: data.name
                 })
-                toast.success(`New Product, ' ${createdProduct} ' has been created!`, {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
             }
         })
     }
 
     const showLoading = () =>
         (loading && (<div className="alert alert-success">
-                <h2>Loading</h2>
+                <CircularProgress color="secondary"/>
             </div>)
         )
+
+    const showSuccess = () => (
+        <div className="alert alert-info" style={{display: createdProduct ? " " : "none"}}>
+            <h3> Loading ... </h3>
+        </div>
+    )
 
     const newPostForm = () => (
         <form className="mb-3" onSubmit={onSubmit}>
@@ -248,7 +246,11 @@ const AddProduct = () => {
                     }
                     {
                         showLoading()
-                    }</div>
+                    }
+                    {
+                        showSuccess()
+                    }
+                </div>
 
             </div>
         </div>

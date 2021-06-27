@@ -128,9 +128,9 @@ const Header = ({history}) => {
                             <List>
                                 <ListItem button>
                                     <Typography className={classes.menuText}>
-                                        <Link to="/questions" className={classes.linkstyle}>
+                                        <Link to="/shop" className={classes.linkstyle}>
                                             <FontAwesomeIcon icon={faShoppingBag} aria-hidden={true}/>  &nbsp;
-                                            <span>Ecomm</span>{' '}
+                                            <span>Shop</span>{' '}
                                         </Link>
                                     </Typography>
                                 </ListItem>
@@ -165,9 +165,9 @@ const Header = ({history}) => {
                     </Typography>
                     <div className={classes.sectionDesktop}>
                         <Typography className={classes.menuText}>
-                            <Link to="/questions" className={classes.linkstyle}>
+                            <Link to="/shop" className={classes.linkstyle}>
                                 <i className="fa fa-book" aria-hidden="true"></i>
-                                <span>Explore</span>{' '}
+                                <span>Shop</span>{' '}
                             </Link>
                         </Typography>
 
@@ -228,9 +228,9 @@ const Header = ({history}) => {
                         <List>
                             <ListItem button>
                                 <Typography className={classes.menuText}>
-                                    <Link to="/questions" className={classes.linkstyle}>
+                                    <Link to="/shop" className={classes.linkstyle}>
                                         <i className="fa fa-book" aria-hidden="true"></i>
-                                        <span>Explore</span>{' '}
+                                        <span>Shop</span>{' '}
                                     </Link>
                                 </Typography>
                             </ListItem>
@@ -281,9 +281,9 @@ const Header = ({history}) => {
                 </Typography>
                 <div className={classes.sectionDesktop}>
                     <Typography className={classes.menuText}>
-                        <Link to="/questions" className={classes.linkstyle}>
+                        <Link to="/shop" className={classes.linkstyle}>
                             <i className="fa fa-book" aria-hidden="true"></i>
-                            <span>Explore</span>{' '}
+                            <span>Shop</span>{' '}
                         </Link>
                     </Typography>
                     <Typography className={classes.menuText}>

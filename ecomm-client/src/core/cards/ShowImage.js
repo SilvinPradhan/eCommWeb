@@ -1,5 +1,6 @@
 import React from 'react'
 import {API} from "../../config";
+import '../../style.css'
 
 const ShowImage = ({item, url}) => {
     return (

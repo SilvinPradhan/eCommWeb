@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Logo from '../static/images/cards/homepage.png'
 import Typography from '@material-ui/core/Typography';
+import '../style.css'
 
 const useStyles = makeStyles({
     root: {},

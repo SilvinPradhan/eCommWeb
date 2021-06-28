@@ -5,6 +5,8 @@ import {getCategories} from "../../admin/apiAdmin";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CheckBox from "../checkbox/CheckBox";
+import {prices} from "../price/FixedPrice";
+import RadioBox from "../radiobox/RadioBox";
 
 const Shop = () => {
     const [categories, setCategories] = useState([]);
@@ -41,7 +43,27 @@ const Shop = () => {
         // console.log('Shop', filters, filterBy)
         const newFilters = {...isfilter}
         newFilters.filters[filterBy] = filters
+        if (filterBy == "price") {
+            let priceValues = handlePrice(filters)
+            newFilters.filters[filterBy] = priceValues
+        }
+        loadFilteredResults(isfilter.filters)
         setIsFilters(newFilters)
+    }
+
+    const handlePrice = (value) => {
+        const data = prices
+        let array = []
+        for (let key in data) {
+            if (data[key]._id === parseInt(value)) {
+                array = data[key].array
+            }
+        }
+        return array
+    }
+
+    const loadFilteredResults = (newFilters) => {
+        console.log(newFilters)
     }
 
     return (
@@ -56,7 +78,14 @@ const Shop = () => {
                         <CheckBox handleFilters={filters => handleFilters(filters, 'category')}
                                   categories={categories}/>
                     </ul>
+                    <h3>Filter by price range</h3>
+                    <div>
+                        <RadioBox handleFilters={filters => handleFilters(filters, 'price')}
+                                  prices={prices}/>
+                    </div>
                 </div>
+
+
                 <div className="col-8">
                     {JSON.stringify(isfilter)}
                 </div>

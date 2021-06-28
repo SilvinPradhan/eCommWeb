@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 
-const CheckBox = ({categories}) => {
+const CheckBox = ({categories, handleFilters}) => {
     const [checked, setChecked] = useState([])
     const handleToggle = category => () => {
         const initialCategoryId = checked.indexOf(category) // Return 1st index or -1
@@ -12,8 +12,9 @@ const CheckBox = ({categories}) => {
             //    Else pop/splice
             newCheckedCategoryId.splice(initialCategoryId, 1)
         }
-        console.log(newCheckedCategoryId)
+        // console.log(newCheckedCategoryId)
         setChecked(newCheckedCategoryId)
+        handleFilters(newCheckedCategoryId)
     }
     return (
         <>

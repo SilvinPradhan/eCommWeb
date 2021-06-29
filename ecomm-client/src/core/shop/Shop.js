@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Layout from "../Layout";
 import Card from "../cards/Card";
 import {getCategories} from "../../admin/apiAdmin";
+import {getFilterProducts} from "../apiCore";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CheckBox from "../checkbox/CheckBox";
@@ -11,6 +12,9 @@ import RadioBox from "../radiobox/RadioBox";
 const Shop = () => {
     const [categories, setCategories] = useState([]);
     const [error, setError] = useState('');
+    const [limit, setLimit] = useState(4);
+    const [skip, setSkip] = useState(0);
+    const [filteredResults, setFilteredResults] = useState([])
     const [isfilter, setIsFilters] = useState({
         filters: {category: [], price: []}
     })
@@ -63,7 +67,13 @@ const Shop = () => {
     }
 
     const loadFilteredResults = (newFilters) => {
-        console.log(newFilters)
+        return getFilterProducts(skip, limit, newFilters).then(data => {
+            if (data.error) {
+                setError(data.error)
+            } else {
+                setFilteredResults(data)
+            }
+        })
     }
 
     return (
@@ -87,7 +97,7 @@ const Shop = () => {
 
 
                 <div className="col-8">
-                    {JSON.stringify(isfilter)}
+                    {JSON.stringify(filteredResults)}
                 </div>
             </div>
         </>

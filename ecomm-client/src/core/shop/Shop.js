@@ -8,12 +8,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import CheckBox from "../checkbox/CheckBox";
 import {prices} from "../price/FixedPrice";
 import RadioBox from "../radiobox/RadioBox";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faCaretSquareDown} from "@fortawesome/free-solid-svg-icons/faCaretSquareDown";
 
 const Shop = () => {
     const [categories, setCategories] = useState([]);
     const [error, setError] = useState('');
-    const [limit, setLimit] = useState(4);
+    const [limit, setLimit] = useState(6);
     const [skip, setSkip] = useState(0);
+    const [size, setSize] = useState(0)
     const [filteredResults, setFilteredResults] = useState([])
     const [isfilter, setIsFilters] = useState({
         filters: {category: [], price: []}
@@ -73,8 +76,33 @@ const Shop = () => {
                 setError(data.error)
             } else {
                 setFilteredResults(data.data)
+                setSize(data.size)
+                setSkip(0)
             }
         })
+    }
+
+    const loadMoreFilters = (newFilters) => {
+        const toSkip = limit + skip
+        return getFilterProducts(toSkip, limit, isfilter.filters).then(data => {
+            if (data.error) {
+                setError(data.error)
+            } else {
+                setFilteredResults([...filteredResults, ...data.data])
+                setSize(data.size)
+                setSkip(toSkip)
+            }
+        })
+    }
+
+    const loadMoreButton = () => {
+        return (
+            size > 0 && size >= limit && (
+                <button onClick={loadMoreFilters} className="btn btn-warning mb-5">Show More <FontAwesomeIcon
+                    icon={faCaretSquareDown}/>
+                </button>
+            )
+        )
     }
 
     return (
@@ -82,7 +110,7 @@ const Shop = () => {
             <Layout title="Shop Deals" description={"Search and find all of the new arrivals and products!"}
                     className={"container-fluid"}/>
             <ToastContainer/>
-            <div className="row">
+            <div className="row mt-2">
                 <div className="col-4">
                     <h3>Categories</h3>
                     <ul>
@@ -106,6 +134,8 @@ const Shop = () => {
                             ))
                         }
                     </div>
+                    <hr/>
+                    {loadMoreButton()}
                 </div>
             </div>
         </>

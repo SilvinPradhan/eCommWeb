@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import Layout from "./Layout";
 import {getProducts} from "./apiCore";
 import Card from './cards/Card'
+import Search from "./search/Search";
 
 const Home = () => {
     const [productsBySell, setProductsBySell] = useState([])
@@ -39,6 +40,7 @@ const Home = () => {
         <>
             <Layout title="eComm Web" description="E-commerce web platform developed using MERN stack"/>
             <div className="container-fluid mt-2">
+                <Search />
                 <h2 className="mb-4"> Popular Now</h2>
                 <div className="row">
                     {

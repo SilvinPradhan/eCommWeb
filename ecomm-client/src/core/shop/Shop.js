@@ -40,6 +40,7 @@ const Shop = () => {
 
     useEffect(() => {
         init()
+        loadFilteredResults(skip, limit, isfilter.filters)
     }, [])
 
     const handleFilters = (filters, filterBy) => {
@@ -71,7 +72,7 @@ const Shop = () => {
             if (data.error) {
                 setError(data.error)
             } else {
-                setFilteredResults(data)
+                setFilteredResults(data.data)
             }
         })
     }
@@ -97,7 +98,14 @@ const Shop = () => {
 
 
                 <div className="col-8">
-                    {JSON.stringify(filteredResults)}
+                    <h3 className={"mb-4"}> All Products</h3>
+                    <div className={"row"}>
+                        {
+                            filteredResults.map((product, index) => (
+                                <Card key={index} product={product}/>
+                            ))
+                        }
+                    </div>
                 </div>
             </div>
         </>

@@ -14,7 +14,7 @@ const Card = ({product}) => {
                 </div>
                 <div className="card-body">
                     <ShowImage item={product} url="products"/>
-                    <p>{product.description}</p>
+                    <p>{product.description.substring(0, 100)}...</p>
                     <p>$ {product.price}</p>
                     <Link to={"/"}>
                         <Button variant="contained" color="secondary">View Product</Button>

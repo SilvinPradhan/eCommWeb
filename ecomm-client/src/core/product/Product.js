@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import {Card, CardHeader, CardContent} from '@material-ui/core'
 import Typography from "@material-ui/core/Typography";
 import Layout from "../Layout";
+import Card from '../cards/Card'
 import {read} from "../apiCore";
 
 const Product = (props) => {
@@ -25,10 +25,19 @@ const Product = (props) => {
 
     return (
         <>
-            <Layout title={"Product Item"} description={"Product details below:"}/>
-            <h3 className={"mb-4"} s>Single Product</h3>
+            <Layout title={`Product: '${product && product.name}'`}
+                    description={`Description: ${product && product.description && product.description.substr(0, 100)}`}/>
             <div className={"row"}>
-                {JSON.stringify(product)}
+                {
+                    product && product.description && (
+                        <Card product={product}>
+
+                        </Card>
+                    )
+                }
+                {
+                    JSON.stringify(product)
+                }
             </div>
         </>
     )

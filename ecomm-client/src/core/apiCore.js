@@ -12,7 +12,7 @@ export const getProducts = (sortBy) => {
         })
 }
 
-export const getFilterProducts = (skip,limit, filters = {}) => {
+export const getFilterProducts = (skip, limit, filters = {}) => {
     const data = {
         limit, skip, filters
     }
@@ -31,3 +31,15 @@ export const getFilterProducts = (skip,limit, filters = {}) => {
             console.log(err);
         });
 };
+
+export const read = (productId) => {
+    return fetch(`${API}/product/${productId}`, {
+        method: 'GET'
+    })
+        .then(res => {
+            return res.json()
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}

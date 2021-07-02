@@ -1,12 +1,18 @@
 import React, {useEffect, useState} from 'react'
-import Layout from "./Layout";
-import {getProducts} from "./apiCore";
-import Card from './cards/Card'
+import {Card, CardHeader, CardContent} from '@material-ui/core'
+import Typography from "@material-ui/core/Typography";
 
 const Product = () => {
     return (
         <>
-
+            <Card>
+                <CardHeader>
+                    <Typography>Product Name Here</Typography>
+                </CardHeader>
+                <CardContent>
+                    <span>Product Content here¬</span>
+                </CardContent>
+            </Card>
         </>
     )
 }

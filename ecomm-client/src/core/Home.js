@@ -40,12 +40,14 @@ const Home = () => {
         <>
             <Layout title="eComm Web" description="E-commerce web platform developed using MERN stack"/>
             <div className="container-fluid mt-2">
-                <Search />
+                <Search/>
                 <h2 className="mb-4"> Popular Now</h2>
                 <div className="row">
                     {
                         productsBySell.map((product, i) => (
-                            <Card key={i} product={product}></Card>
+                            <div key={i} className="col-4 mb-3">
+                                <Card product={product}></Card>
+                            </div>
                         ))
                     }
                 </div>
@@ -54,7 +56,9 @@ const Home = () => {
                 <div className="row">
                     {
                         productsByArrival.map((product, i) => (
-                            <Card key={i} product={product}></Card>
+                            <div key={i} className="col-4 mb-3">
+                                <Card product={product}></Card>
+                            </div>
                         ))
                     }
                 </div>

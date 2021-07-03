@@ -27,17 +27,18 @@ const Product = (props) => {
         <>
             <Layout title={`Product: '${product && product.name}'`}
                     description={`Description: ${product && product.description && product.description.substr(0, 100)}`}/>
-            <div className={"row"}>
-                {
-                    product && product.description && (
-                        <Card product={product}>
-
-                        </Card>
-                    )
-                }
-                {
-                    JSON.stringify(product)
-                }
+            <div className={"row mr-2"}>
+                <div className={"col-8"}>
+                    {
+                        product && product.description && (
+                            <Card product={product} displayViewProductButton={false}
+                                  className={"container container-fluid mt-2 mb-4"}/>
+                        )
+                    }
+                </div>
+                {/*{*/}
+                {/*    JSON.stringify(product)*/}
+                {/*}*/}
             </div>
         </>
     )

@@ -16,6 +16,8 @@ import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 
 import {signout, isAuthenticated} from "../auth/user";
+import {productTotal} from "./cart/cartHandler";
+import {faShoppingCart} from "@fortawesome/free-solid-svg-icons/faShoppingCart";
 
 const drawerWidth = 170;
 const useStyles = makeStyles((theme) => ({
@@ -187,6 +189,14 @@ const Header = ({history}) => {
                                 <span>Sign In</span>{' '}
                             </Link>
                         </Typography>
+                        <Typography className={classes.menuText}>
+                            <Link to="/cart" className={classes.linkstyle} style={isActive(history, '/cart')}>
+                                {' '}
+                                <FontAwesomeIcon icon={faShoppingCart} aria-hidden={true}/>  &nbsp;
+                                <span>Cart <sup><small
+                                    className={"cart-badge"}>{productTotal()}</small></sup></span>{' '}
+                            </Link>
+                        </Typography>
                     </div>
                 </Toolbar>
             </AppBar>
@@ -301,6 +311,14 @@ const Header = ({history}) => {
                               onClick={() => signout(() => {
                                   history.push('/')
                               })}>Sign Out</span>
+                    </Typography>
+                    <Typography className={classes.menuText}>
+                        <Link to="/cart" className={classes.linkstyle} style={isActive(history, '/cart')}>
+                            {' '}
+                            <FontAwesomeIcon icon={faShoppingCart} aria-hidden={true}/>  &nbsp;
+                            <span>Cart <sup><small
+                                className={"cart-badge"}>{productTotal()}</small></sup></span>{' '}
+                        </Link>
                     </Typography>
                 </div>
             </Toolbar>

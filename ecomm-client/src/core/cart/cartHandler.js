@@ -23,3 +23,12 @@ export const addProduct = (product, next) => {
         next()
     }
 }
+
+export const productTotal =() => {
+    if(typeof window !== 'undefined'){
+        if(localStorage.getItem('cart')) {
+            return JSON.parse(localStorage.getItem('cart')).length
+        }
+    }
+    return 0
+}

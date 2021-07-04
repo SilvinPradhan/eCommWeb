@@ -1,5 +1,5 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React, {useState} from 'react'
+import {Link, Redirect} from 'react-router-dom'
 import {Button} from "@material-ui/core";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCartPlus} from "@fortawesome/free-solid-svg-icons/faCartPlus";
@@ -8,6 +8,7 @@ import moment from "moment";
 import {addProduct} from '../cart/cartHandler'
 
 const Card = ({product, displayViewProductButton = true}) => {
+    const [redirect, setRedirect] = useState(false)
     product.createdAt = undefined;
     const showProductButton = (displayViewProductButton) => {
         return displayViewProductButton && (
@@ -17,11 +18,23 @@ const Card = ({product, displayViewProductButton = true}) => {
         )
     }
 
+    const addToCart = () => {
+        addProduct(product, () => {
+            setRedirect(true)
+        })
+    }
+
+    const needRedirect = () => {
+        if (redirect) {
+            return <Redirect to={"/cart"}/>
+        }
+    }
+
     const showCartButton = () => {
-        return <Link to={"/"} className="list-unstyled">
-            <Button variant="contained" color="secondary"><FontAwesomeIcon
+        return (<>
+            <Button onClick={addToCart} variant="contained" color="secondary"><FontAwesomeIcon
                 icon={faCartPlus}></FontAwesomeIcon>{' '} Cart</Button>
-        </Link>
+        </>)
     }
 
     const showInStock = (quantity) => {
@@ -34,6 +47,9 @@ const Card = ({product, displayViewProductButton = true}) => {
                 {product.name}
             </div>
             <div className="card-body">
+                {
+                    needRedirect(redirect)
+                }
                 <ShowImage item={product} url="products"/>
                 <p className={"lead mt-2"}>{product.description.substr(0, 100)}...</p>
                 <p className={"black-10"}>$ {product.price}</p>

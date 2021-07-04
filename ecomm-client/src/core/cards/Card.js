@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCartPlus} from "@fortawesome/free-solid-svg-icons/faCartPlus";
 import ShowImage from "./ShowImage";
 import moment from "moment";
+import {addProduct} from '../cart/cartHandler'
 
 const Card = ({product, displayViewProductButton = true}) => {
     product.createdAt = undefined;

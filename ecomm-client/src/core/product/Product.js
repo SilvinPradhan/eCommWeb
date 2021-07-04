@@ -29,7 +29,7 @@ const Product = (props) => {
     useEffect(() => {
         const productId = props.match.params.productId
         singleProduct(productId)
-    }, [])
+    }, [props])
 
     return (
         <>
@@ -44,12 +44,12 @@ const Product = (props) => {
                         )
                     }
                 </div>
-                <div className={"col-4"}>
+                <div className={"col-4 mt-2"}>
                     <h5>Recommendations</h5>
                     <span>People who searched for this product also looked at these items below.</span>
                     {
                         relatedProduct.map((p, i) => (
-                            <div className={"mb-3"}>
+                            <div className={"mb-4"}>
                                 <Card key={i} product={p}/>
                             </div>
                         ))

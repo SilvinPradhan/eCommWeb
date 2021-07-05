@@ -8,9 +8,11 @@ import Typography from "@material-ui/core/Typography";
 
 const Cart = () => {
     const [items, setItems] = useState([])
+    const [run, setRun] = useState(false)
     useEffect(() => {
+        console.log('MAX DEPTH');
         setItems(getCart())
-    }, [items])
+    }, [run])
     const showItems = items => {
         return (
             <>
@@ -19,7 +21,7 @@ const Cart = () => {
                 {items.map((product, index) => {
                     return (
                         <Card key={index} product={product} showAddToCart={false} cartUpdate={true}
-                              showRemoveFromCart={true}></Card>
+                              showRemoveFromCart={true} setRun={setRun} run={run}></Card>
                     )
                 })}
             </>

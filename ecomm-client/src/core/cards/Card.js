@@ -13,7 +13,8 @@ const Card = ({
                   displayViewProductButton = true,
                   showAddToCart = true,
                   cartUpdate = false,
-                  showRemoveFromCart = false
+                  showRemoveFromCart = false,
+                  setRun = f => f, run = undefined
               }) => {
     const [redirect, setRedirect] = useState(false)
     const [count, setCount] = useState(product.count)
@@ -33,6 +34,7 @@ const Card = ({
     }
 
     const handleChange = (productId) => event => {
+        setRun(!run);
         setCount(event.target.value < 1 ? 1 : event.target.value)
         if (event.target.value >= 1) {
             updateProduct(productId, event.target.value)
@@ -53,10 +55,17 @@ const Card = ({
     }
 
     const showRemoveButton = (showRemoveFromCart) => {
-        return showRemoveFromCart && (<>
-            <Button onClick={() => removeProduct(product._id)} variant="contained" color="secondary"><FontAwesomeIcon
-                icon={faTimesCircle}></FontAwesomeIcon>{' '} Remove Product</Button>
-        </>)
+        return showRemoveFromCart && (
+            <button
+                onClick={() => {
+                    removeProduct(product._id);
+                    setRun(!run); // run useEffect in parent Cart
+                }}
+                className="btn btn-outline-danger mt-2 mb-2"
+            >
+                Remove <FontAwesomeIcon icon={faTimesCircle} aria-hidden={true}/>
+            </button>
+        )
     }
 
     const showInStock = (quantity) => {

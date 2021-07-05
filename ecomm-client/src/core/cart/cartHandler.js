@@ -24,11 +24,20 @@ export const addProduct = (product, next) => {
     }
 }
 
-export const productTotal =() => {
-    if(typeof window !== 'undefined'){
-        if(localStorage.getItem('cart')) {
+export const productTotal = () => {
+    if (typeof window !== 'undefined') {
+        if (localStorage.getItem('cart')) {
             return JSON.parse(localStorage.getItem('cart')).length
         }
     }
     return 0
+}
+
+export const getCart = () => {
+    if (typeof window !== 'undefined') {
+        if (localStorage.getItem('cart')) {
+            return JSON.parse(localStorage.getItem('cart'))
+        }
+    }
+    return []
 }

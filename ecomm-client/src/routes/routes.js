@@ -4,6 +4,7 @@ import SignUp from "../user/signup";
 import SignIn from "../user/signin";
 import Home from "../core/Home";
 import Header from "../core/Header";
+import Cart from "../core/cart/Cart";
 
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -31,6 +32,7 @@ const Routes = () => {
                 <AdminRoute path={"/create/category"} exact component={AddCategory}/>
                 <AdminRoute path={"/create/product"} exact component={AddProduct}/>
                 <Route path={"/product/:productId"} exact component={Product}/>
+                <Route path={"/cart"} exact component={Cart}/>
             </Switch>
         </BrowserRouter>
     )

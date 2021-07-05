@@ -25,10 +25,15 @@ const Cart = () => {
     }
     const noItems = () => {
         return (
-            <h3>
-                Your cart is empty. <br/>
-                <Link to={"/shop"}>Continue Shopping</Link>
-            </h3>
+            <>
+                <h4>Your cart is empty.</h4>
+                <br/>
+                <div className={"row"}>
+                    <img src={"https://i1.wp.com/www.huratips.com/wp-content/uploads/2019/04/empty-cart.png?ssl=1"}
+                         width={400} height={350}/>
+                    <Link to={"/shop"}>Continue Shopping</Link>
+                </div>
+            </>
         )
     }
     return (

@@ -7,7 +7,7 @@ import ShowImage from "./ShowImage";
 import moment from "moment";
 import {addProduct} from '../cart/cartHandler'
 
-const Card = ({product, displayViewProductButton = true}) => {
+const Card = ({product, displayViewProductButton = true, showAddToCart = true}) => {
     const [redirect, setRedirect] = useState(false)
     product.createdAt = undefined;
     const showProductButton = (displayViewProductButton) => {
@@ -30,11 +30,11 @@ const Card = ({product, displayViewProductButton = true}) => {
         }
     }
 
-    const showCartButton = () => {
-        return (<>
+    const showCartButton = (showAddToCart) => {
+        return (showAddToCart && (<>
             <Button onClick={addToCart} variant="contained" color="secondary"><FontAwesomeIcon
                 icon={faCartPlus}></FontAwesomeIcon>{' '} Cart</Button>
-        </>)
+        </>))
     }
 
     const showInStock = (quantity) => {
@@ -65,7 +65,7 @@ const Card = ({product, displayViewProductButton = true}) => {
                     showProductButton(displayViewProductButton)
                 }
                 {
-                    showCartButton()
+                    showCartButton(showAddToCart)
                 }
             </div>
         </div>

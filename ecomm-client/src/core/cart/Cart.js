@@ -17,7 +17,7 @@ const Cart = () => {
                 <hr/>
                 {items.map((product, index) => {
                     return (
-                        <Card key={index} product={product}></Card>
+                        <Card key={index} product={product} showAddToCart={false}></Card>
                     )
                 })}
             </>

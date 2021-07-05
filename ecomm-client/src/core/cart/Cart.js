@@ -9,15 +9,16 @@ const Cart = () => {
     const [items, setItems] = useState([])
     useEffect(() => {
         setItems(getCart())
-    }, [])
+    }, [items])
     const showItems = items => {
         return (
             <>
-                <h4>Your Cart has {`${items.length}`} products</h4>
+                <Typography className={"mt-2"}>Your Cart has {`${items.length}`} products</Typography>
                 <hr/>
                 {items.map((product, index) => {
                     return (
-                        <Card key={index} product={product} showAddToCart={false}></Card>
+                        <Card key={index} product={product} showAddToCart={false} cartUpdate={true}
+                              showRemoveFromCart={true}></Card>
                     )
                 })}
             </>
@@ -45,7 +46,8 @@ const Cart = () => {
                     {items.length > 0 ? showItems(items) : noItems()}
                 </div>
                 <div className={"col-6"}>
-                    <Typography>SHow checkout options/shipping address/total/update quantity</Typography>
+                    <Typography className={"mt-2"}>Show checkout options/shipping address/total/update
+                        quantity</Typography>
                 </div>
             </div>
         </>

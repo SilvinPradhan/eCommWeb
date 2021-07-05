@@ -5,11 +5,19 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCartPlus} from "@fortawesome/free-solid-svg-icons/faCartPlus";
 import ShowImage from "./ShowImage";
 import moment from "moment";
-import {addProduct} from '../cart/cartHandler'
+import {addProduct, updateProduct, removeProduct} from '../cart/cartHandler'
+import {faTimesCircle} from "@fortawesome/free-solid-svg-icons/faTimesCircle";
 
-const Card = ({product, displayViewProductButton = true, showAddToCart = true}) => {
+const Card = ({
+                  product,
+                  displayViewProductButton = true,
+                  showAddToCart = true,
+                  cartUpdate = false,
+                  showRemoveFromCart = false
+              }) => {
     const [redirect, setRedirect] = useState(false)
-    product.createdAt = undefined;
+    const [count, setCount] = useState(product.count)
+
     const showProductButton = (displayViewProductButton) => {
         return displayViewProductButton && (
             <Link to={`/product/${product._id}`} className={"mr-2 list-unstyled"}>
@@ -22,6 +30,13 @@ const Card = ({product, displayViewProductButton = true, showAddToCart = true}) 
         addProduct(product, () => {
             setRedirect(true)
         })
+    }
+
+    const handleChange = (productId) => event => {
+        setCount(event.target.value < 1 ? 1 : event.target.value)
+        if (event.target.value >= 1) {
+            updateProduct(productId, event.target.value)
+        }
     }
 
     const needRedirect = () => {
@@ -37,9 +52,27 @@ const Card = ({product, displayViewProductButton = true, showAddToCart = true}) 
         </>))
     }
 
+    const showRemoveButton = (showRemoveFromCart) => {
+        return showRemoveFromCart && (<>
+            <Button onClick={() => removeProduct(product._id)} variant="contained" color="secondary"><FontAwesomeIcon
+                icon={faTimesCircle}></FontAwesomeIcon>{' '} Remove Product</Button>
+        </>)
+    }
+
     const showInStock = (quantity) => {
         return quantity > 0 ? <span className={"badge alert-success"}>In Stock</span> :
             <span className={"badge alert-warning"}>Out of Stock</span>
+    }
+
+    const showCartUpdateOptions = (cartUpdate) => {
+        return cartUpdate && (
+            <div className={"input-group mb-3"}>
+                <div className={"input-group-prepend"}>
+                    <span className={"input-group-text"}>Quantity</span>
+                </div>
+                <input type={"number"} className={"form-control"} value={count} onChange={handleChange(product._id)}/>
+            </div>
+        )
     }
     return (
         <div className="card">
@@ -66,6 +99,12 @@ const Card = ({product, displayViewProductButton = true, showAddToCart = true}) 
                 }
                 {
                     showCartButton(showAddToCart)
+                }
+                {
+                    showCartUpdateOptions(cartUpdate)
+                }
+                {
+                    showRemoveButton(showRemoveFromCart)
                 }
             </div>
         </div>

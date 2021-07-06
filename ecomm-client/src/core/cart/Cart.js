@@ -44,7 +44,7 @@ const Cart = () => {
         <>
             <Layout title={"Shopping Cart"}
                     description={"Manage your cart items. Add remove checkout or continue shopping."}/>
-            <div className={"row"}>
+            <div className={"row container"}>
                 <div className={"col-6"}>
                     {items.length > 0 ? showItems(items) : noItems()}
                 </div>

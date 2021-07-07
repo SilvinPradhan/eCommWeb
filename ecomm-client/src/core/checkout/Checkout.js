@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import {getBrainTreeClientToken} from "../apiCore";
+import {getBrainTreeClientToken, processPayment} from "../apiCore";
 import Card from '../cards/Card'
 import {Link} from "react-router-dom";
 import {isAuthenticated} from "../../auth/user";
 import DropIn from "braintree-web-drop-in-react";
+import {toast, ToastContainer} from "react-toastify";
 
 const Checkout = ({products}) => {
 
@@ -57,7 +58,28 @@ const Checkout = ({products}) => {
             .then(data => {
                 console.log(data)
                 nonce = data.nonce
-                console.log('Send nonce and total to process', nonce, getTotal(products))
+                const paymentData = {
+                    paymentMethodNonce: nonce,
+                    amount: getTotal(products)
+                }
+                processPayment(userId, token, paymentData)
+                    .then(response => {
+                        setData({...data, success: response.success})
+                        //    empty cart
+                        //    create order
+                        toast.success(`${data.success}`, {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
             })
             .catch(error => {
                 console.log('DropIn Error', error)
@@ -74,7 +96,7 @@ const Checkout = ({products}) => {
                             <DropIn options={{
                                 authorization: data.clientToken
                             }} onInstance={instance => data.instance = instance}/>
-                            <button onClick={purchase} className={"btn btn-success"}>Pay</button>
+                            <button onClick={purchase} className={"btn btn-success btn-block"}>Pay</button>
                         </div>) : null
                 }
             </div>
@@ -91,6 +113,7 @@ const Checkout = ({products}) => {
 
     return (
         <div>
+            <ToastContainer/>
             <h4>Total: ${getTotal()}</h4>
             {
                 showError(data.error)

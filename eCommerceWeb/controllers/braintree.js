@@ -25,12 +25,12 @@ exports.processPayment = (req, res) => {
 //    charge
     let newTransaction = gateway.transaction.sale({
         amount: amountFromTheClient,
-        paymentMethodNonce:nonceFromTheClient,
+        paymentMethodNonce: nonceFromTheClient,
         options: {
             submitForSettlement: true
         }
-    },(error, result) => {
-        if(error) {
+    }, (error, result) => {
+        if (error) {
             res.status(500).json(error)
         } else {
             res.json(result)

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {getBrainTreeClientToken, processPayment} from "../apiCore";
 import Card from '../cards/Card'
+import {emptyCart} from "../cart/cartHandler";
 import {Link} from "react-router-dom";
 import {isAuthenticated} from "../../auth/user";
 import DropIn from "braintree-web-drop-in-react";
@@ -66,6 +67,9 @@ const Checkout = ({products}) => {
                     .then(response => {
                         setData({...data, success: response.success})
                         //    empty cart
+                        emptyCart(() => {
+                            console.log('payment successful and empty cart')
+                        })
                         //    create order
                         toast.success(`${data.success}`, {
                             position: "top-right",
@@ -94,7 +98,10 @@ const Checkout = ({products}) => {
                     data.clientToken !== null && products.length > 0 ?
                         (<div>
                             <DropIn options={{
-                                authorization: data.clientToken
+                                authorization: data.clientToken,
+                                paypal: {
+                                    flow: "vault"
+                                }
                             }} onInstance={instance => data.instance = instance}/>
                             <button onClick={purchase} className={"btn btn-success btn-block"}>Pay</button>
                         </div>) : null

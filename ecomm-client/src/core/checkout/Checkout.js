@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {getBrainTreeClientToken, processPayment} from "../apiCore";
+import {getBrainTreeClientToken, processPayment, createOrder} from "../apiCore";
 import {Link} from 'react-router-dom';
 import DropIn from 'braintree-web-drop-in-react';
 import {CircularProgress} from "@material-ui/core";
@@ -12,11 +12,7 @@ const Checkout = ({products, setRun = f => f, run = undefined}) => {
         success: false,
         clientToken: null,
         error: '',
-        instance: {
-            requestPaymentMethod() {
-
-            }
-        },
+        instance: {},
         address: ''
     });
 
@@ -39,9 +35,9 @@ const Checkout = ({products, setRun = f => f, run = undefined}) => {
         getToken(userId, token);
     }, [run]);
 
-    // const handleAddress = event => {
-    //     setData({ ...data, address: event.target.value });
-    // };
+    const handleAddress = event => {
+        setData({...data, address: event.target.value});
+    };
 
     const getTotal = () => {
         return products.reduce((currentValue, nextValue) => {
@@ -59,7 +55,7 @@ const Checkout = ({products, setRun = f => f, run = undefined}) => {
         );
     };
 
-    // let deliveryAddress = data.address;
+    let deliveryAddress = data.address;
 
     const purchase = async () => {
         setData({loading: true});
@@ -88,6 +84,16 @@ const Checkout = ({products, setRun = f => f, run = undefined}) => {
                         console.log(response);
                         // empty cart
                         // create order
+
+                        const createOrderData = {
+                            products: products,
+                            transaction_id: response.transaction.id,
+                            amount: response.transaction.amount,
+                            address: deliveryAddress
+                        }
+
+                        createOrder(userId, token, createOrderData)
+
                         setData({
                             loading: false,
                             success: true
@@ -96,29 +102,6 @@ const Checkout = ({products, setRun = f => f, run = undefined}) => {
                             setRun(!run); // run useEffect in parent Cart
                             console.log('payment success and empty cart');
                         });
-
-                        // const createOrderData = {
-                        //     products: products,
-                        //     transaction_id: response.transaction.id,
-                        //     amount: response.transaction.amount,
-                        //     address: deliveryAddress
-                        // };
-
-                        // createOrder(userId, token, createOrderData)
-                        //     .then(response => {
-                        //         emptyCart(() => {
-                        //             setRun(!run); // run useEffect in parent Cart
-                        //             console.log('payment success and empty cart');
-                        //             setData({
-                        //                 loading: false,
-                        //                 success: true
-                        //             });
-                        //         });
-                        //     })
-                        //     .catch(error => {
-                        //         console.log(error);
-                        //         setData({ loading: false });
-                        //     });
                     })
                     .catch(error => {
                         console.log(error);
@@ -135,15 +118,15 @@ const Checkout = ({products, setRun = f => f, run = undefined}) => {
         <div onBlur={() => setData({...data, error: ''})}>
             {data.clientToken !== null && products.length > 0 ? (
                 <div>
-                    {/*<div className="gorm-group mb-3">*/}
-                    {/*    <label className="text-muted">Delivery address:</label>*/}
-                    {/*    <textarea*/}
-                    {/*        onChange={handleAddress}*/}
-                    {/*        className="form-control"*/}
-                    {/*        value={data.address}*/}
-                    {/*        placeholder="Type your delivery address here..."*/}
-                    {/*    />*/}
-                    {/*</div>*/}
+                    <div className="gorm-group mb-3">
+                        <label className="text-muted">Delivery address:</label>
+                        <textarea
+                            onChange={handleAddress}
+                            className="form-control"
+                            value={data.address}
+                            placeholder="Type your delivery address here..."
+                        />
+                    </div>
 
                     <DropIn
                         options={{

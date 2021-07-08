@@ -92,16 +92,15 @@ const Checkout = ({products, setRun = f => f, run = undefined}) => {
                             address: deliveryAddress
                         }
 
-                        createOrder(userId, token, createOrderData)
-
-                        setData({
-                            loading: false,
-                            success: true
-                        });
-                        emptyCart(() => {
-                            setRun(!run); // run useEffect in parent Cart
-                            console.log('payment success and empty cart');
-                        });
+                        createOrder(userId, token, createOrderData).then(response => {
+                            emptyCart(() => {
+                                setRun(!run);
+                                console.log('payment successfully also empty cart');
+                                setData({
+                                    loading: false, success: true
+                                })
+                            })
+                        })
                     })
                     .catch(error => {
                         console.log(error);

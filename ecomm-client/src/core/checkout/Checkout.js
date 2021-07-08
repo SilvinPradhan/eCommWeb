@@ -99,6 +99,7 @@ const Checkout = ({products, setRun = f => f, run = undefined}) => {
                                 setData({
                                     loading: false, success: true
                                 })
+                                window.location.reload()
                             })
                         })
                     })

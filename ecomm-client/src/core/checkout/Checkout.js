@@ -10,6 +10,7 @@ import {toast, ToastContainer} from "react-toastify";
 const Checkout = ({products}) => {
 
     const [data, setData] = useState({
+        loading: false,
         success: false,
         clientToken: null,
         error: '',
@@ -21,7 +22,7 @@ const Checkout = ({products}) => {
     const token = isAuthenticated() && isAuthenticated().token
 
     const getToken = (userId, token) => {
-        return getBrainTreeClientToken(userId, token).then(data => {
+        getBrainTreeClientToken(userId, token).then(data => {
             if (data.error) {
                 console.log(data.error);
                 setData({...data, error: data.error});
@@ -52,12 +53,13 @@ const Checkout = ({products}) => {
     }
 
     const purchase = () => {
+        setData({loading: true})
         // send the nonce to your server
         // nonce = data.instance.requestPaymentMethod()
         let nonce;
         let getNonce = data.instance.requestPaymentMethod()
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 nonce = data.nonce
                 const paymentData = {
                     paymentMethodNonce: nonce,
@@ -65,25 +67,28 @@ const Checkout = ({products}) => {
                 }
                 processPayment(userId, token, paymentData)
                     .then(response => {
+                        console.log(response)
                         setData({...data, success: response.success})
                         //    empty cart
                         emptyCart(() => {
                             console.log('payment successful and empty cart')
+                            setData({loading: false, success: true})
                         })
                         //    create order
-                        toast.success(`${data.success}`, {
-                            position: "top-right",
-                            autoClose: 5000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                        });
                     })
                     .catch(error => {
                         console.log(error)
+                        setData({loading: false})
                     })
+                toast.success(`Click 'Pay' to process to checkout! `, {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             })
             .catch(error => {
                 console.log('DropIn Error', error)
@@ -118,6 +123,10 @@ const Checkout = ({products}) => {
         )
     }
 
+    const showLoading = (loading) => (
+        loading && <h2>Loading...</h2>
+    )
+
     return (
         <div>
             <ToastContainer/>
@@ -128,6 +137,7 @@ const Checkout = ({products}) => {
             {
                 showCheckout()
             }
+            {showLoading(data.loading)}
         </div>
     )
 }

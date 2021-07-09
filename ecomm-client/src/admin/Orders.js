@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {Typography} from "@material-ui/core";
 import Layout from "../core/Layout";
+import moment from 'moment'
 
 const Orders = () => {
     const [orders, setOrders] = useState([])
@@ -18,6 +19,7 @@ const Orders = () => {
                 console.log(data.error)
             } else {
                 setOrders(data)
+                console.log(data)
             }
         })
     }
@@ -28,9 +30,9 @@ const Orders = () => {
     //If there are no orders
     const showOrdersLength = (orders) => {
         if (orders.length > 0) {
-            return <span className={"text-danger display-5"}>Total Orders: {orders.length}</span>
+            return <span className={"text-danger display-6"}>Total Orders: {orders.length}</span>
         } else {
-            return <span className={"text-danger display-5"}>No Orders</span>
+            return <span className={"text-danger display-6"}>No Orders</span>
         }
     }
 
@@ -40,7 +42,40 @@ const Orders = () => {
             <div className={'row'}>
                 <div className={"col-md-8 offset-md-2"}>
                     {showOrdersLength(orders)}
-                    {JSON.stringify(orders)}
+                    {
+                        orders.map((order, index) => {
+                            return (<div className={"mt-5"} key={index} style={{borderBottom: "2px solid indigo"}}>
+                                <h4 className={"mb-5"}>
+                                  <span className={""}>
+                                      Order ID: {order._id}
+                                  </span>
+                                </h4>
+                                <ul className={"list-group mb-2"}>
+                                    <li className={"list-group-item"}>
+                                        {order.status}
+                                    </li>
+                                    <li className={"list-group-item"}>
+                                        Ordered By: {order.user.username}
+                                    </li>
+                                    <li className={"list-group-item"}>
+                                        Transaction ID: {order.transaction_id}
+                                    </li>
+                                    <li className={"list-group-item"}>
+                                        Amount: {order.amount}
+                                    </li>
+                                    <li className={"list-group-item"}>
+                                        Ordered Date: {moment(order.createdAt).fromNow()}
+                                    </li>
+                                    <li className={"list-group-item"}>
+                                        Delivery Address: {order.address}
+                                    </li>
+                                </ul>
+                                <h5 className={"mt-4 mb-4 font-italic"}>
+                                    Total Products in the Order: {order.products.length}
+                                </h5>
+                            </div>)
+                        })
+                    }
                 </div>
             </div>
         </>

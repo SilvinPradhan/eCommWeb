@@ -26,16 +26,20 @@ const Orders = () => {
     }, [])
 
     //If there are no orders
-    const noOrders = () => {
-        return orders.length < 1 ? <h4> No Orders found in the database.</h4> : null
+    const showOrdersLength = (orders) => {
+        if (orders.length > 0) {
+            return <span className={"text-danger display-5"}>Total Orders: {orders.length}</span>
+        } else {
+            return <span className={"text-danger display-5"}>No Orders</span>
+        }
     }
 
     return (
         <>
-            <Layout title={"Orders"} description={`Hi ${user.name}, you can manage your orders here!`}/>
+            <Layout title={"Orders"} description={`Hi ${user.username}, you can manage your orders here!`}/>
             <div className={'row'}>
                 <div className={"col-md-8 offset-md-2"}>
-                    {noOrders()}
+                    {showOrdersLength(orders)}
                     {JSON.stringify(orders)}
                 </div>
             </div>

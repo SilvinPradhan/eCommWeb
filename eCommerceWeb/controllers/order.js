@@ -16,13 +16,15 @@ exports.create = (req, res) => {
 }
 
 exports.listOrders = (req, res) => {
-    Order.find().populate('user', "_id, name, address")
-        .sort('-created').exec((err, orders) => {
-        if (error) {
-            return res.status(400).json({
-                error: errorHandler(error)
-            })
-        }
-        res.json(orders)
-    })
+    Order.find()
+        .populate('user', "_id, name, address")
+        .sort('-created')
+        .exec((error, orders) => {
+            if (error) {
+                return res.status(400).json({
+                    error: 'Could not find the list of item orders.'
+                })
+            }
+            res.json(orders)
+        })
 }

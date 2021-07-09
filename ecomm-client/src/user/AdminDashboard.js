@@ -11,6 +11,7 @@ import {faEnvelope} from "@fortawesome/free-solid-svg-icons/faEnvelope";
 import {faUserLock} from "@fortawesome/free-solid-svg-icons/faUserLock";
 import {faLayerGroup} from "@fortawesome/free-solid-svg-icons/faLayerGroup";
 import {faCartPlus} from "@fortawesome/free-solid-svg-icons/faCartPlus";
+import {faClipboardList} from "@fortawesome/free-solid-svg-icons/faClipboardList";
 
 const styles = theme => ({
     root: {},
@@ -42,6 +43,10 @@ const AdminDashboard = (props) => {
                     <li className="list-group-item">
                         <Link className={"nav-link"} to="/create/product"> <FontAwesomeIcon
                             icon={faCartPlus}/>Create Product</Link>
+                    </li>
+                    <li className="list-group-item">
+                        <Link className={"nav-link"} to="/admin/orders"> <FontAwesomeIcon
+                            icon={faClipboardList}/>View Orders</Link>
                     </li>
                 </ul>
             </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 // import Layout from "../core/Layout";
 import {isAuthenticated} from "../auth/user"
 import {withStyles} from '@material-ui/core/styles';
@@ -10,6 +10,9 @@ import {faShoppingCart} from "@fortawesome/free-solid-svg-icons/faShoppingCart";
 import {faUserCheck} from "@fortawesome/free-solid-svg-icons/faUserCheck";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons/faEnvelope";
 import {faUserLock} from "@fortawesome/free-solid-svg-icons/faUserLock";
+
+import {getPurchaseHistory} from "./apiUser";
+import moment from "moment";
 
 const styles = theme => ({
     root: {},
@@ -26,9 +29,28 @@ const styles = theme => ({
 
 const UserDashboard = (props) => {
 
+    const [history, setHistory] = useState([])
+
     const {classes} = props;
 
     const {user: {_id, username, email, role}} = isAuthenticated();
+    const token = isAuthenticated().token
+
+    const init = (userId, token) => {
+        return getPurchaseHistory(userId, token).then(data => {
+            if (data.error) {
+                console.log(data.error)
+            } else {
+                setHistory(data)
+                console.log(data)
+            }
+        })
+    }
+
+    useEffect(() => {
+        init(_id, token)
+    }, [])
+
     const userLinks = () => {
         return (
             <div className="card">
@@ -75,17 +97,33 @@ const UserDashboard = (props) => {
         )
     }
 
-    const purchaseHistory = () => {
+    const purchaseHistory = (history) => {
         return (
             <div className="container mt-3">
                 <div className="card mb-5">
                     <h3 className="card-header">Purchase History</h3>
                     <ul className="list-group">
                         <li className="list-group-item">
-                            <span style={{
-                                fontSize: '16px',
-                                fontWeight: "bold"
-                            }}>History</span></li>
+                            {history.map((h, i) => {
+                                return (
+                                    <div key={i}>
+                                        <hr/>
+                                        {h.products.map((p, i) => {
+                                            return (
+                                                <div key={i}>
+                                                    <h6>Product Name: {p.name}</h6>
+                                                    <h6>Product Price: ${p.price}</h6>
+                                                    <h6>
+                                                        Date Ordered:{" "}
+                                                        {moment(p.createdAt).fromNow()}
+                                                    </h6>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                );
+                            })}
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -108,7 +146,7 @@ const UserDashboard = (props) => {
                 </div>
                 <div className="col-9">
                     {userInfo()}
-                    {purchaseHistory()}
+                    {purchaseHistory(history)}
                 </div>
             </div>
         </div>

@@ -40,7 +40,7 @@ const UserDashboard = (props) => {
                             Cart</Link>
                     </li>
                     <li className="list-group-item">
-                        <Link className={"nav-link"} to="/profile/update">
+                        <Link className={"nav-link"} to={`/profile/${_id}`}>
                             <FontAwesomeIcon icon={faUserEdit} aria-hidden={true}/>
                             Update profile</Link>
                     </li>

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {isAuthenticated} from "../auth/user"
 import {Link} from 'react-router-dom'
-import {listOrders, getStatusValues} from './apiAdmin'
+import {listOrders, getStatusValues, updateOrderStatus} from './apiAdmin'
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
@@ -21,7 +21,7 @@ const Orders = () => {
                 console.log(data.error)
             } else {
                 setOrders(data)
-                console.log(data)
+                // console.log(data)
             }
         })
     }
@@ -61,8 +61,14 @@ const Orders = () => {
 
     const handleStatusChange = (e, orderId) => {
         //update order status
-        console.log('update order status')
-
+        return updateOrderStatus(user._id, token, orderId, e.target.value).then((data) => {
+            if (data.error) {
+                console.log('Update status failed. There is a problem in the server.')
+            } else {
+            //    load orders again => mount orders
+                loadOrders()
+            }
+        })
     }
 
     const showStatus = (order) => {

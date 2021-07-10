@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {isAuthenticated} from "../auth/user"
 import {Link} from 'react-router-dom'
-import {listOrders} from './apiAdmin'
+import {listOrders, getStatusValues} from './apiAdmin'
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
@@ -11,6 +11,8 @@ import moment from 'moment'
 
 const Orders = () => {
     const [orders, setOrders] = useState([])
+    const [statusValues, setStatusValues] = useState([])
+
     const {user, token} = isAuthenticated()
 
     const loadOrders = () => {
@@ -23,8 +25,20 @@ const Orders = () => {
             }
         })
     }
+
+    const loadStatusValues = () => {
+        getStatusValues(user._id, token).then(data => {
+            if (data.error) {
+                console.log(data.error)
+            } else {
+                setStatusValues(data)
+            }
+        })
+    }
+
     useEffect(() => {
         loadOrders()
+        loadStatusValues()
     }, [])
 
     //If there are no orders
@@ -45,6 +59,30 @@ const Orders = () => {
         </div>)
     }
 
+    const handleStatusChange = (e, orderStatus) => {
+        //update order status
+        console.log('update order status')
+
+    }
+
+    const showStatus = (orderStatus) => {
+        return (<div className={"form-group"}>
+            <h3 className={"mark mb-4"}>Status: {orderStatus.status}</h3>
+            <select className={"form-control"} onChange={(e) => handleStatusChange(e, orderStatus._id)}>
+                <option>Update Status</option>
+                {
+                    statusValues.map((status, index) => {
+                        return (
+                            <option key={index} value={status}>
+                                {status}
+                            </option>
+                        )
+                    })
+                }
+            </select>
+        </div>)
+    }
+
     return (
         <>
             <Layout title={"Orders"} description={`Hi ${user.username}, you can manage your orders here!`}/>
@@ -61,7 +99,7 @@ const Orders = () => {
                                 </h4>
                                 <ul className={"list-group mb-2"}>
                                     <li className={"list-group-item"}>
-                                        {order.status}
+                                        {showStatus(order)}
                                     </li>
                                     <li className={"list-group-item"}>
                                         Ordered By: {order.user.username}

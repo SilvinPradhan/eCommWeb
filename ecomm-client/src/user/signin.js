@@ -60,7 +60,7 @@ const SignIn = () => {
         });
     const onSubmit = async (e) => {
         e.preventDefault();
-        console.log({email, password});
+        // console.log({email, password});
         setFormData({...formData, error: '', loading: true})
         signin({email, password}).then(data => {
             if (data.error) {

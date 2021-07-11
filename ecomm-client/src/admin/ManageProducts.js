@@ -34,19 +34,22 @@ const ManageProducts = () => {
             <Layout title={"Manage Products"} description={"Edit/Delete Products"} className={"container-fluid"}/>
             <div className={"row"}>
                 <div className={"col-12"}>
-                    <ul className={"list-group"}>
+                    <h4 className={"text-center mt-2 mb-2"}>Total {products.length} Products</h4>
+                    <hr/>
+                    <ul className={"list-group container"}>
                         {
                             products.map((p, i) => {
                                 return (
                                     <li key={i}
-                                        className={"list-group d-flex justify-content-between align-items-center"}>
+                                        className={"list-group-item d-flex justify-content-between align-items-center"}>
                                         <strong>{p.name}</strong>
                                         <Link to={`/admin/product/update/${p._id}`}>
                                             <span className={"badge alert-warning"}>
                                                 Update
                                             </span>
                                         </Link>
-                                        <span onClick={() => remover(p._id)} className={"badge alert-danger"}>
+                                        <span onClick={() => remover(p._id)} className={"badge alert-danger"}
+                                              style={{cursor: "pointer"}}>
                                             Delete
                                         </span>
                                     </li>

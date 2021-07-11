@@ -112,7 +112,8 @@ export const updateOrderStatus = (userId, token, orderId, status) => {
 }
 
 export const getProducts = () => {
-    return fetch(`${API}/products`, {
+    //limit the number of products to 100 or put 'undefined'
+    return fetch(`${API}/products?limit=100`, {
         method: 'GET'
     })
         .then(res => {

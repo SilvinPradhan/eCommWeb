@@ -161,7 +161,7 @@ const AddProduct = () => {
 
     const showSuccess = () => (
         <div className="alert alert-info" style={{display: createdProduct ? " " : "none"}}>
-            <h3> Loading ... </h3>
+            <h3> Product {`${createdProduct}`} has been created ... </h3>
         </div>
     )
 

@@ -296,14 +296,31 @@ const Header = ({history}) => {
                             <span>Shop</span>{' '}
                         </Link>
                     </Typography>
-                    <Typography className={classes.menuText}>
-                        <Link to="/user/dashboard" className={classes.linkstyle}
-                              style={isActive(history, '/user/dashboard')}>
-                            {' '}
-                            <FontAwesomeIcon icon={faUserPlus} aria-hidden={true}/>  &nbsp;
-                            <span>Dashboard</span>{' '}
-                        </Link>
-                    </Typography>
+                    {
+                        isAuthenticated() && isAuthenticated().user.role === 0 && (
+                            <ListItem button>
+                                <Typography className={classes.menuText}>
+                                    <Link to="/user/dashboard" className={classes.linkstyle}
+                                          style={isActive(history, '/user/dashboard')}>
+                                        {' '}
+                                        <FontAwesomeIcon icon={faUserPlus} aria-hidden={true}/>  &nbsp;
+                                        <span>Dashboard</span>{' '}
+                                    </Link>
+                                </Typography>
+                            </ListItem>
+                        )
+                    }{
+                    isAuthenticated() && isAuthenticated().user.role === 1 && (
+                        <Typography className={classes.menuText}>
+                            <Link to="/admin/dashboard" className={classes.linkstyle}
+                                  style={isActive(history, '/admin/dashboard')}>
+                                {' '}
+                                <FontAwesomeIcon icon={faUserPlus} aria-hidden={true}/>  &nbsp;
+                                <span>Dashboard</span>{' '}
+                            </Link>
+                        </Typography>
+                    )
+                }
                     <Typography className={classes.menuText}>
                         <FontAwesomeIcon icon={faSignOutAlt} aria-hidden={true}/>  &nbsp;
                         {' '}

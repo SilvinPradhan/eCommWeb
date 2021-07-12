@@ -154,7 +154,7 @@ export const getProduct = (productId) => {
 }
 
 export const updateProduct = (productId, userId, token, product) => {
-    return fetch(`${API}/product/${productId}/$userId}`, {
+    return fetch(`${API}/product/${productId}/${userId}`, {
         method: 'PUT',
         headers: {
             Accept: 'application/json',

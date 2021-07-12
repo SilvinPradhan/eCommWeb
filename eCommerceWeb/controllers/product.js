@@ -90,13 +90,13 @@ exports.update = (req, res) => {
         }
 
         //Check for all fields
-        const {name, description, price, category, quantity, shipping} = fields;
-
-        if (!name || !description || !price || !category || !quantity || !shipping) {
-            return res.status(400).json({
-                error: "All of the fields are to be filled."
-            })
-        }
+        // const {name, description, price, category, quantity, shipping} = fields;
+        //
+        // if (!name || !description || !price || !category || !quantity || !shipping) {
+        //     return res.status(400).json({
+        //         error: "All of the fields are to be filled."
+        //     })
+        // }
 
         let product = req.product
         product = _.extend(product, fields)

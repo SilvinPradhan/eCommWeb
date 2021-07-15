@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useTheme} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import {Link, withRouter, useHistory} from 'react-router-dom';
+import {Link, withRouter, Router} from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -18,6 +18,8 @@ import List from '@material-ui/core/List';
 import {signout, isAuthenticated} from "../auth/user";
 import {productTotal} from "./cart/cartHandler";
 import {faShoppingCart} from "@fortawesome/free-solid-svg-icons/faShoppingCart";
+
+import NProgress from 'nprogress'
 
 const drawerWidth = 170;
 const useStyles = makeStyles((theme) => ({
@@ -92,6 +94,10 @@ const Header = ({history}) => {
             return {color: '#fff'}
         }
     }
+
+    useEffect(() => history.listen(() => {
+
+    }), [])
 
     const guestLink = (
         <div className={classes.root}>

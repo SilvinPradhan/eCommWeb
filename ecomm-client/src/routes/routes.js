@@ -1,5 +1,11 @@
-import React from 'react'
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import React, {useState} from 'react'
+import {useNProgress} from '@tanem/react-nprogress'
+import {
+    BrowserRouter, Switch, Route, NavLinkProps,
+    Redirect,
+    RouteComponentProps,
+} from "react-router-dom";
+import ReactDOM from 'react-dom'
 import SignUp from "../user/signup";
 import SignIn from "../user/signin";
 import Home from "../core/Home";
@@ -21,7 +27,22 @@ import Profile from '../user/Profile'
 import ManageProducts from "../admin/ManageProducts";
 import UpdateProduct from "../admin/UpdateProduct";
 
+import Bar from '../core/nprogress/bar'
+import Container from '../core/nprogress/container'
+
+const Progress = ({isAnimating}) => {
+    const {animationDuration, isFinished, progress} = useNProgress({
+        isAnimating
+    })
+    return (
+        <Container animationDuration={animationDuration} isFinished={isFinished}>
+            <Bar animationDuration={animationDuration} progress={progress}/>
+        </Container>
+    )
+}
+
 const Routes = () => {
+    const [isLoading, setLoading] = useState(false)
     return (
         <BrowserRouter>
             <ToastContainer/>
@@ -41,6 +62,9 @@ const Routes = () => {
                 <AdminRoute path={"/admin/orders"} exact component={Orders}/>
                 <AdminRoute path={"/admin/manage"} exact component={ManageProducts}/>
                 <PrivateRoute path={"/profile/:userId"} exact component={Profile}/>
+
+                <Route render={() => <div>Not Found</div>}/>
+
             </Switch>
         </BrowserRouter>
     )

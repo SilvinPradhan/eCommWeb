@@ -26,6 +26,7 @@ import Product from '../core/product/Product'
 import Profile from '../user/Profile'
 import ManageProducts from "../admin/ManageProducts";
 import UpdateProduct from "../admin/UpdateProduct";
+import PageNotFound from "../404/PageNotFound";
 
 import Bar from '../core/nprogress/bar'
 import Container from '../core/nprogress/container'
@@ -63,7 +64,8 @@ const Routes = () => {
                 <AdminRoute path={"/admin/manage"} exact component={ManageProducts}/>
                 <PrivateRoute path={"/profile/:userId"} exact component={Profile}/>
 
-                <Route render={() => <div>Not Found</div>}/>
+                {/*<Route path={"*"} render={() => <div>Not Found</div>}/>*/}
+                <Route path={"*"} component={PageNotFound}/>
 
             </Switch>
         </BrowserRouter>

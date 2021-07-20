@@ -38,10 +38,8 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-const mongoString = `mongodb+srv://silvinpradhan:Invoker200695@ecommdb.uff12.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
-
 // Database Configuration
-mongoose.connect(`${mongoString}`, {
+mongoose.connect(`${process.env.DATABASE}`, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,

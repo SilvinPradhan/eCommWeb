@@ -53,7 +53,7 @@ exports.signout = (req, res) => {
 }
 
 exports.requireSignIn = expressJWT({
-    secret: "icuDummies2595",
+    secret: `${process.env.JWT_SECRET}`,
     algorithms: ["HS256"], // added later
     userProperty: "auth",
 });

@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import {useNProgress} from '@tanem/react-nprogress'
 import {
     BrowserRouter, Switch, Route, NavLinkProps,
     Redirect,
@@ -28,46 +27,37 @@ import ManageProducts from "../admin/ManageProducts";
 import UpdateProduct from "../admin/UpdateProduct";
 import PageNotFound from "../404/PageNotFound";
 
-import Bar from '../core/nprogress/bar'
-import Container from '../core/nprogress/container'
-
-const Progress = ({isAnimating}) => {
-    const {animationDuration, isFinished, progress} = useNProgress({
-        isAnimating
-    })
-    return (
-        <Container animationDuration={animationDuration} isFinished={isFinished}>
-            <Bar animationDuration={animationDuration} progress={progress}/>
-        </Container>
-    )
-}
-
 const Routes = () => {
     const [isLoading, setLoading] = useState(false)
     return (
         <BrowserRouter>
             <ToastContainer/>
             <Header/>
-            <Switch>
-                <Route path="/" exact component={Home}/>
-                <Route path="/shop" exact component={Shop}/>
-                <Route path="/signin" exact component={SignIn}/>
-                <Route path="/signup" exact component={SignUp}/>
-                <PrivateRoute path={"/user/dashboard"} exact component={UserDashboard}/>
-                <AdminRoute path={"/admin/dashboard"} exact component={AdminDashboard}/>
-                <AdminRoute path={"/create/category"} exact component={AddCategory}/>
-                <AdminRoute path={"/create/product"} exact component={AddProduct}/>
-                <AdminRoute path={"/admin/product/update/:productId"} exact component={UpdateProduct}/>
-                <Route path={"/product/:productId"} exact component={Product}/>
-                <Route path={"/cart"} exact component={Cart}/>
-                <AdminRoute path={"/admin/orders"} exact component={Orders}/>
-                <AdminRoute path={"/admin/manage"} exact component={ManageProducts}/>
-                <PrivateRoute path={"/profile/:userId"} exact component={Profile}/>
+            <Route render={({location}) => (
+                <>
+                    <Switch location={location}>
+                        <Route path="/" exact component={Home}/>
+                        <Route path="/shop" exact component={Shop}/>
+                        <Route path="/signin" exact component={SignIn}/>
+                        <Route path="/signup" exact component={SignUp}/>
+                        <PrivateRoute path={"/user/dashboard"} exact component={UserDashboard}/>
+                        <AdminRoute path={"/admin/dashboard"} exact component={AdminDashboard}/>
+                        <AdminRoute path={"/create/category"} exact component={AddCategory}/>
+                        <AdminRoute path={"/create/product"} exact component={AddProduct}/>
+                        <AdminRoute path={"/admin/product/update/:productId"} exact component={UpdateProduct}/>
+                        <Route path={"/product/:productId"} exact component={Product}/>
+                        <Route path={"/cart"} exact component={Cart}/>
+                        <AdminRoute path={"/admin/orders"} exact component={Orders}/>
+                        <AdminRoute path={"/admin/manage"} exact component={ManageProducts}/>
+                        <PrivateRoute path={"/profile/:userId"} exact component={Profile}/>
 
-                {/*<Route path={"*"} render={() => <div>Not Found</div>}/>*/}
-                <Route path={"*"} component={PageNotFound}/>
+                        {/*<Route path={"*"} render={() => <div>Not Found</div>}/>*/}
+                        <Route path={"*"} component={PageNotFound}/>
 
-            </Switch>
+                    </Switch>
+                </>
+            )}/>
+
         </BrowserRouter>
     )
 }

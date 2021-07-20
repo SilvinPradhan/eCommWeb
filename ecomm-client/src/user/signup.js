@@ -1,9 +1,6 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {signup} from '../auth/user'
-import Layout from '../core/Layout';
-import {API} from "../config";
-// import { signup } from '../auth';
 
 const Signup = () => {
     const [values, setValues] = useState({

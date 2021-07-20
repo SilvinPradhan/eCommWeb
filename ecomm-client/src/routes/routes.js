@@ -1,10 +1,7 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {
-    BrowserRouter, Switch, Route, NavLinkProps,
-    Redirect,
-    RouteComponentProps,
+    BrowserRouter, Switch, Route,
 } from "react-router-dom";
-import ReactDOM from 'react-dom'
 import SignUp from "../user/signup";
 import SignIn from "../user/signin";
 import Home from "../core/Home";
@@ -28,7 +25,6 @@ import UpdateProduct from "../admin/UpdateProduct";
 import PageNotFound from "../404/PageNotFound";
 
 const Routes = () => {
-    const [isLoading, setLoading] = useState(false)
     return (
         <BrowserRouter>
             <ToastContainer/>

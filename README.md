@@ -7,6 +7,7 @@ Contents
 ========
 
  * [Deployment](#deployment)
+
 **Deploy this FullStack Ecommerce app to Digital Ocean cloud servers, Add a Domain name and use Cloudflare's CDN to your application along with free SSL.**
 
 ** Code for React Presentation Layer - server.js

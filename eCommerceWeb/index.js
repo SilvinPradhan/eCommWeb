@@ -7,7 +7,7 @@ const cors = require('cors');
 const expressValidator = require('express-validator')
 
 const dotenv = require('dotenv')
-if (process.env.NODE_ENV === "development") dotenv.config();
+dotenv.config();
 
 const mongoose = require('mongoose');
 
@@ -29,14 +29,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser())
 app.use(expressValidator())
 app.use(cors())
-
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, 'client/build')));
-
-    app.get('*', function (req, res) {
-        res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-    });
-}
 
 // Database Configuration
 mongoose.connect(`${process.env.DATABASE}`, {

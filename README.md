@@ -12,6 +12,117 @@ Contents
 ========
 
  * [Deployment](#deployment)
+ * [Project File Structure(#structure)
+ 
+## File Structure ##
+
+1. Backend Directory Tree
+```
+eCommerceWeb/
+├── controllers
+│   ├── auth.js
+│   ├── braintree.js
+│   ├── category.js
+│   ├── order.js
+│   ├── product.js
+│   └── user.js
+├── helpers
+│   └── dbErrorHandler.js
+├── index.js
+├── models
+│   ├── category.js
+│   ├── order.js
+│   ├── product.js
+│   └── user.js
+├── package-lock.json
+├── package.json
+├── routes
+│   ├── auth.js
+│   ├── braintree.js
+│   ├── category.js
+│   ├── order.js
+│   ├── product.js
+│   └── user.js
+└── validator
+    └── index.js
+```
+
+2. Frontend Directory Tree
+```
+ecomm-client/
+├── README.md
+├── package-lock.json
+├── package.json
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+├── server.js
+└── src
+    ├── 404
+    │   ├── PageNotFound.js
+    │   └── PageNotFound.scss
+    ├── App.js
+    ├── admin
+    │   ├── AddCategory.js
+    │   ├── AddProduct.js
+    │   ├── ManageProducts.js
+    │   ├── Orders.js
+    │   ├── UpdateProduct.js
+    │   └── apiAdmin.js
+    ├── auth
+    │   ├── AdminRoute.js
+    │   ├── PrivateRoute.js
+    │   └── user.js
+    ├── config.js
+    ├── core
+    │   ├── Header.js
+    │   ├── Home.js
+    │   ├── Layout.js
+    │   ├── apiCore.js
+    │   ├── cards
+    │   │   ├── Card.js
+    │   │   └── ShowImage.js
+    │   ├── cart
+    │   │   ├── Cart.js
+    │   │   └── cartHandler.js
+    │   ├── checkbox
+    │   │   └── CheckBox.js
+    │   ├── checkout
+    │   │   └── Checkout.js
+    │   ├── price
+    │   │   └── FixedPrice.js
+    │   ├── product
+    │   │   └── Product.js
+    │   ├── radiobox
+    │   │   └── RadioBox.js
+    │   ├── search
+    │   │   └── Search.js
+    │   └── shop
+    │       └── Shop.js
+    ├── index.js
+    ├── reportWebVitals.js
+    ├── routes
+    │   └── routes.js
+    ├── setupTests.js
+    ├── static
+    │   └── images
+    │       ├── cards
+    │       │   └── homepage.png
+    │       └── categoryBG
+    │           └── bg.jpg
+    ├── style.css
+    └── user
+        ├── AdminDashboard.js
+        ├── Profile.js
+        ├── UserDashboard.js
+        ├── apiUser.js
+        ├── signin.js
+        └── signup.js
+```
 
 **Deploy this FullStack Ecommerce app to Digital Ocean cloud servers, Add a Domain name and use Cloudflare's CDN to your application along with free SSL.**
 

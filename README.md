@@ -80,4 +80,6 @@ location / {
 <hr />
 
 ### Step 2 --- Server Setup Access ###
-*
+* Access droplet as the 'root' user by using the password for root created in the last step.
+ In the terminal of your computer, run the following command: <br/>
+``` > ssh root@<server_ip_address> ```

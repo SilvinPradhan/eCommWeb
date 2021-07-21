@@ -64,7 +64,7 @@ location / {
 1. Sign up or Sign in to a new account in Digital Ocean(DO).
 2. Open the "create" drop down menu and click the "Droplets" link - takes you to the 'Create Droplets' page. Follow the configuration options before creating a new server.
 3. Select Ubuntu OS for your server: 
-<imgsrc="https://miro.medium.com/max/1400/1*-EPiH9jiBHCq_k-67oSuHw.png" width="650px" height="250px"/>
+<img src="https://miro.medium.com/max/1400/1*-EPiH9jiBHCq_k-67oSuHw.png" width="650px" height="250px"/>
 4. Choose the Basic Plan for $5/month that gives enough processing power to run a medium-sized web app. However, it can be upgraded later according to the need.
 <img align="center" src="https://miro.medium.com/max/1400/1*-W5qkNrUsaTywF0W1IwtAA.png" width="650px" height="250px"/>
 5. If additional ` block storage ` is required for storing static assets such as Images, Videos, and more, you can add it. However, it is not necessary.

@@ -1,5 +1,5 @@
-# eCommWeb
-[FullStack] E-Commerce Shopping Platform developed using the modern technology stacks, MERN (MongoDB, Express, React, Node)
+# eCommWeb :technologist:	
+[FullStack] E-Commerce Shopping Platform developed using the modern technology stacks, MERN (MongoDB, Express, React, Node) :shopping:
 
 [![Build Status](https://travis-ci.com/alichtman/shallow-backup.svg?branch=master)](https://travis-ci.com/alichtman/shallow-backup)
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
@@ -12,7 +12,7 @@ Contents
 ========
 
  * [Deployment](#deployment)
- * [Project File Structure(#structure)
+ * [Project File Structure](#structure)
  
 ## File Structure ##
 
@@ -124,7 +124,7 @@ ecomm-client/
         └── signup.js
 ```
 
-**Deploy this FullStack Ecommerce app to Digital Ocean cloud servers, Add a Domain name and use Cloudflare's CDN to your application along with free SSL.**
+**Deploy this FullStack Ecommerce app to Digital Ocean cloud servers, Add a Domain name and use Cloudflare's CDN to your application along with free SSL.** 	:rocket:
 
 ** Code for React Presentation Layer - server.js
 ```

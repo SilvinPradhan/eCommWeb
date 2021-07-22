@@ -171,7 +171,7 @@ const Header = ({history}) => {
                     <div className={classes.sectionDesktop}>
                         <Typography className={classes.menuText}>
                             <Link to="/shop" className={classes.linkstyle}>
-                                <i className="fa fa-book" aria-hidden="true"></i>
+                                <FontAwesomeIcon icon={faShoppingBag} aria-hidden={true}/>{' '}
                                 <span>Shop</span>{' '}
                             </Link>
                         </Typography>
@@ -242,6 +242,7 @@ const Header = ({history}) => {
                             <ListItem button>
                                 <Typography className={classes.menuText}>
                                     <Link to="/shop" className={classes.linkstyle} style={isActive(history, '/shop')}>
+                                        <FontAwesomeIcon icon={faShoppingBag} aria-hidden={true}/>{' '}
                                         <span>Shop</span>{' '}
                                     </Link>
                                 </Typography>
@@ -294,7 +295,7 @@ const Header = ({history}) => {
                 <div className={classes.sectionDesktop}>
                     <Typography className={classes.menuText}>
                         <Link to="/shop" className={classes.linkstyle} style={isActive(history, '/shop')}>
-                            <FontAwesomeIcon icon={faUserPlus} aria-hidden={true}/>  &nbsp;
+                            <FontAwesomeIcon icon={faShoppingBag} aria-hidden={true}/>{' '}
                             <span>Shop</span>{' '}
                         </Link>
                     </Typography>

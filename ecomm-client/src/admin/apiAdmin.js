@@ -43,8 +43,8 @@ export const getCategories = () => {
         .then(res => {
             return res.json()
         })
-        .catch(err => {
-            console.log(err)
+        .catch(error => {
+            console.log(error)
         })
 }
 

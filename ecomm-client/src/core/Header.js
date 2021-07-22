@@ -163,7 +163,7 @@ const Header = ({history}) => {
                         </Drawer>
                     </div>
                     <Typography variant="h5" className={classes.title}>
-                        <Link to="/" className={classes.linkstyle}>
+                        <Link to="/" className={classes.linkstyle} style={isActive(history, '/')}>
                             {/*<FontAwesomeIcon icon={faShoppingBag} aria-hidden={true}/>{' '}*/}
                             eComm
                         </Link>
@@ -241,8 +241,7 @@ const Header = ({history}) => {
                         <List>
                             <ListItem button>
                                 <Typography className={classes.menuText}>
-                                    <Link to="/shop" className={classes.linkstyle}>
-                                        <i className="fa fa-book" aria-hidden="true"></i>
+                                    <Link to="/shop" className={classes.linkstyle} style={isActive(history, '/shop')}>
                                         <span>Shop</span>{' '}
                                     </Link>
                                 </Typography>
@@ -288,14 +287,14 @@ const Header = ({history}) => {
                     </Drawer>
                 </div>
                 <Typography className={classes.title} variant="h5" noWrap>
-                    <Link to="/" className={classes.linkstyle}>
-                        <i className="fas fa-users"></i> eComm
+                    <Link to="/" className={classes.linkstyle} style={isActive(history, '/')}>
+                        eComm
                     </Link>
                 </Typography>
                 <div className={classes.sectionDesktop}>
                     <Typography className={classes.menuText}>
-                        <Link to="/shop" className={classes.linkstyle}>
-                            <i className="fa fa-book" aria-hidden="true"></i>
+                        <Link to="/shop" className={classes.linkstyle} style={isActive(history, '/shop')}>
+                            <FontAwesomeIcon icon={faUserPlus} aria-hidden={true}/>  &nbsp;
                             <span>Shop</span>{' '}
                         </Link>
                     </Typography>

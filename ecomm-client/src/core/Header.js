@@ -357,5 +357,4 @@ Header.propTypes = {
     // isAuthenticated: PropTypes.bool,
 };
 
-
 export default withRouter(Header);

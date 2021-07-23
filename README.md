@@ -12,8 +12,32 @@ Contents
 ========
 
  * [Deployment](#deployment)
+ * [Installation](#installation)
  * [Project File Structure](#structure)
+ <hr />
  
+## Cloning ##
+
+In your terminal of the destination folder, run the following command:
+
+``` $ git clone https://github.com/SilvinPradhan/eCommWeb.git <eCommWeb> ```
+
+<hr />
+
+## Installation ##
+
+1. After cloning the project, navigate inside the project
+``` > cd eCommWeb
+    > cd eCommerceWeb
+    > npm install // to install packages and dependencies
+    > cd .. // navigate out of eCommerceWeb
+    > cd eComm-client // navigate inside the client folder
+    > npm install 
+```
+2. To setup the server, navigate inside the backend project folder, i.e eCommerceWeb
+
+<hr />
+
 ## File Structure ##
 
 1. Backend Directory Tree

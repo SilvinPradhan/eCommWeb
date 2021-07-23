@@ -12,8 +12,9 @@ Contents
 ========
 
  * [Deployment](#deployment)
+ * [Cloning](#cloning)
  * [Installation](#installation)
- * [Project File Structure](#structure)
+ * [File Structure](#structure)
  <hr />
  
 ## Cloning ##
@@ -29,13 +30,34 @@ In your terminal of the destination folder, run the following command:
 1. After cloning the project, navigate inside the project
 ``` > cd eCommWeb
     > cd eCommerceWeb
-    > npm install // to install packages and dependencies
-    > cd .. // navigate out of eCommerceWeb
-    > cd eComm-client // navigate inside the client folder
-    > npm install 
+    > npm install [//]: # (Install Dependencies and Packages.)
+    > cd .. <!--- navigate out of the backend folder --->
+    > cd eComm-client <!--- navigate inside client project folder --->
+    > npm install <!--- install package dependencies --->
 ```
-2. To setup the server, navigate inside the backend project folder, i.e eCommerceWeb
-
+2. To setup the server, navigate inside the backend project folder, i.e, eCommerceWeb. 
+   Run the following commands:
+   * sudo touch .env // Create an environment variable file
+3. Add the following environment variables in ` .env ` file:
+   [Image file here!]
+4. Now, in the terminal of the backend project folder, run the following command: <br />
+``` $ npm run server ```
+5. For the ` DATABASE ` environment variable, you need to set up the Free Tier Cluster for MongoDB Atlas. Follow this site which is a walkthrough for the setup: <br />
+``` https://studio3t.com/knowledge-base/articles/mongodb-atlas-tutorial/ ```
+6. Add a new terminal on the same Parent Directory (eCommWeb)
+```
+ > cd eComm-client
+ > sudo touch .env
+```
+ [Image file here!]
+7. Add the following lines to the ` .env ` file:
+ ```
+ SKIP_PREFLIGHT_CHECK=true
+ REACT_APP_API_URL='http://localhost:8000/api'
+```
+8. Now test if the React App is working:
+``` $ npm run start ```
+ 
 <hr />
 
 ## File Structure ##

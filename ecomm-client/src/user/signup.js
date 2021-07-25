@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {signup} from '../auth/user'
+import {toast} from "react-toastify";
 
 const Signup = () => {
     const [values, setValues] = useState({
@@ -9,11 +10,14 @@ const Signup = () => {
         lastName: '',
         email: '',
         password: '',
+        confirmPassword: '',
         error: '',
         success: false
     });
 
-    const {username, firstName, lastName, email, password, success, error} = values;
+    const [strongPassword, setStrongPassword] = useState('')
+
+    const {username, firstName, lastName, email, password, confirmPassword, success, error} = values;
 
     const handleChange = name => event => {
         setValues({...values, error: '', [name]: event.target.value});
@@ -35,8 +39,18 @@ const Signup = () => {
                     lastName: '',
                     email: '',
                     password: '',
+                    confirmPassword: '',
                     error: '',
                     success: true
+                });
+                toast.info(`You have successfully signed up!, ${username}`, {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
                 });
             }
         });
@@ -67,6 +81,11 @@ const Signup = () => {
             <div className="form-group">
                 <label className="text-muted">Password</label>
                 <input onChange={handleChange('password')} type="password" className="form-control" value={password}/>
+            </div>
+            <div className="form-group">
+                <label className="text-muted">Confirm Password</label>
+                <input onChange={handleChange('confirmPassword')} type="password" className="form-control"
+                       value={confirmPassword}/>
             </div>
             <button onClick={clickSubmit} className="btn btn-primary">
                 Submit

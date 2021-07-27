@@ -21,7 +21,7 @@ const Card = ({
 
     const showProductButton = (displayViewProductButton) => {
         return displayViewProductButton && (
-            <Link to={`/product/${product._id}`} className={"mr-2 list-unstyled"}>
+            <Link to={`/product/${product._id}`} className={"mr-2 list-unstyled"} style={{textDecoration: "none"}}>
                 < Button variant="contained" color="secondary">View Product</Button>
             </Link>
         )

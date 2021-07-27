@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#264653',
     },
     paper: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(5),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',

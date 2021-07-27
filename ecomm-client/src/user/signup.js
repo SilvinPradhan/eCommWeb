@@ -1,8 +1,15 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {signup} from '../auth/user'
+
+import IconButton from "@material-ui/core/IconButton";
+import InputLabel from "@material-ui/core/InputLabel";
+import Visibility from "@material-ui/icons/Visibility";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import Input from "@material-ui/core/Input";
+
 import {toast} from "react-toastify";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {
     Button,
@@ -14,8 +21,6 @@ import {
 import {makeStyles} from '@material-ui/core/styles';
 
 import validator from "validator/es";
-import {faEye} from "@fortawesome/free-solid-svg-icons/faEye";
-import {faTimes} from "@fortawesome/free-solid-svg-icons/faTimes";
 
 const useStyles = makeStyles((theme) => ({
     root: {},
@@ -41,6 +46,12 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3, 0, 2),
         backgroundColor: '#264653',
     },
+    // textContainer: {
+    //     display: 'flex',
+    //     flexDirection: 'inline',
+    //     alignItems: 'center',
+    //     justifyContent: 'space-between'
+    // }
 }));
 
 const Signup = () => {
@@ -51,6 +62,7 @@ const Signup = () => {
         email: '',
         password: '',
         confirmPassword: '',
+        showPassword: false,
         error: '',
         success: false
     });
@@ -69,7 +81,19 @@ const Signup = () => {
         }
     }
 
-    const {username, firstName, lastName, email, password, confirmPassword, success, error} = values;
+    const {username, firstName, lastName, email, password, confirmPassword, showPassword, success, error} = values;
+
+    const handleClickShowPassword = () => {
+        setValues({...values, showPassword: showPassword ? false : true})
+    }
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault()
+    }
+
+    // const handlePasswordChange = (prop) => (event) => {
+    //     setValues({...values, [prop]: event.target.value});
+    // };
 
     const handleChange = name => event => {
         setValues({...values, error: '', [name]: event.target.value});
@@ -81,9 +105,9 @@ const Signup = () => {
         setValues({...values, error: ''});
 
         signup({username, firstName, lastName, email, password}).then(data => {
-            if (password !== confirmPassword) {
-                alert('Password Mismatch')
-            }
+            // if (password !== confirmPassword) {
+            //     alert('Password Mismatch')
+            // }
             if (data.error) {
                 setValues({...values, error: data.error, success: false});
             } else {
@@ -146,7 +170,6 @@ const Signup = () => {
                         label="First Name"
                         name="firstName"
                         fullWidth
-                        autoFocus
                         value={firstName}
                         onChange={handleChange('firstName')
                         }
@@ -157,7 +180,6 @@ const Signup = () => {
                         label="Last Name"
                         name="lastName"
                         fullWidth
-                        autoFocus
                         value={lastName}
                         onChange={handleChange('lastName')
                         }
@@ -165,7 +187,6 @@ const Signup = () => {
                     <TextField
                         variant="outlined"
                         fullWidth
-                        autoFocus
                         name="email"
                         margin="normal"
                         label="Email"
@@ -174,26 +195,45 @@ const Signup = () => {
                         onChange={handleChange('email')}
                     ></TextField>
 
-                    <TextField
-                        variant="outlined"
-                        fullWidth
-                        autoFocus
-                        name="password"
-                        margin="normal"
-                        label="password"
-                        type={"password"}
-                        value={password}
+                    {/*<TextField*/}
+                    {/*    variant="outlined"*/}
+                    {/*    fullWidth*/}
+                    {/*    autoFocus*/}
+                    {/*    name="password"*/}
+                    {/*    margin="normal"*/}
+                    {/*    label="Password"*/}
+                    {/*    type={"password"}*/}
+                    {/*    value={password}*/}
+                    {/*    onChange={handleChange('password')}*/}
+                    {/*/>*/}
+                    <InputLabel htmlFor="standard-adornment-password">
+                        Password
+                    </InputLabel>
+                    <Input
+                        type={showPassword ? "text" : "password"}
                         onChange={handleChange('password')}
+                        value={password}
+                        name="password"
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                >
+                                    {showPassword ? <Visibility/> : <VisibilityOff/>}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                        fullWidth
                     />
 
                     <TextField
                         variant="outlined"
                         fullWidth
-                        autoFocus
                         name="confirmPassword"
                         margin="normal"
                         type={"password"}
-                        label="confirm password"
+                        label="Confirm password"
                         value={confirmPassword}
                         onChange={handleChange('confirmPassword')}
                     />

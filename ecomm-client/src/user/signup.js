@@ -203,6 +203,7 @@ const Signup = () => {
                         variant="contained"
                         className={classes.submit}
                         onClick={clickSubmit}
+                        disabled={!email || !password}
                     >
                         Register
                     </Button>

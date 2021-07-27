@@ -2,8 +2,46 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {signup} from '../auth/user'
 import {toast} from "react-toastify";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import {
+    Button,
+    TextField,
+    Typography,
+    Avatar,
+    Container,
+} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
 
 import validator from "validator/es";
+import {faEye} from "@fortawesome/free-solid-svg-icons/faEye";
+import {faTimes} from "@fortawesome/free-solid-svg-icons/faTimes";
+
+const useStyles = makeStyles((theme) => ({
+    root: {},
+    heading: {
+        color: '#264653',
+        align: 'center',
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: '#264653',
+    },
+    paper: {
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    form: {
+        width: '100%',
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+        backgroundColor: '#264653',
+    },
+}));
 
 const Signup = () => {
     const [values, setValues] = useState({
@@ -16,6 +54,7 @@ const Signup = () => {
         error: '',
         success: false
     });
+    const classes = useStyles();
 
     const [strongPassword, setStrongPassword] = useState('')
 
@@ -37,10 +76,14 @@ const Signup = () => {
     };
 
     const clickSubmit = event => {
+        window.scrollTo(0, 0);
         event.preventDefault();
         setValues({...values, error: ''});
 
         signup({username, firstName, lastName, email, password}).then(data => {
+            if (password !== confirmPassword) {
+                alert('Password Mismatch')
+            }
             if (data.error) {
                 setValues({...values, error: data.error, success: false});
             } else {
@@ -68,41 +111,107 @@ const Signup = () => {
         });
     };
 
+    const showHide = () => {
+
+    }
+
     const signUpForm = () => (
-        <form>
-            <div className="form-group">
-                <label className="text-muted">Username</label>
-                <input onChange={handleChange('username')} type="text" className="form-control" value={username}/>
-            </div>
 
-            <div className="form-group">
-                <label className="text-muted">First Name</label>
-                <input onChange={handleChange('firstName')} type="text" className="form-control" value={firstName}/>
-            </div>
+        <Container component="main" maxWidth="xs">
+            <div className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                    <LockOutlinedIcon/>
+                </Avatar>
+                <Typography className={classes.heading}>
+                    <i className="fas fa-user"></i> Create Your Account
+                </Typography>
 
-            <div className="form-group">
-                <label className="text-muted">Last Name</label>
-                <input onChange={handleChange('lastName')} type="text" className="form-control" value={lastName}/>
-            </div>
+                <form
+                    className={classes.form}
+                >
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        label="Username"
+                        name="username"
+                        fullWidth
+                        autoFocus
+                        value={username}
+                        onChange={handleChange('username')
+                        }
+                    ></TextField>
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        label="First Name"
+                        name="firstName"
+                        fullWidth
+                        autoFocus
+                        value={firstName}
+                        onChange={handleChange('firstName')
+                        }
+                    ></TextField>
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        label="Last Name"
+                        name="lastName"
+                        fullWidth
+                        autoFocus
+                        value={lastName}
+                        onChange={handleChange('lastName')
+                        }
+                    ></TextField>
+                    <TextField
+                        variant="outlined"
+                        fullWidth
+                        autoFocus
+                        name="email"
+                        margin="normal"
+                        label="Email"
+                        value={email}
+                        type="email"
+                        onChange={handleChange('email')}
+                    ></TextField>
 
-            <div className="form-group">
-                <label className="text-muted">Email</label>
-                <input onChange={handleChange('email')} type="email" className="form-control" value={email}/>
-            </div>
+                    <TextField
+                        variant="outlined"
+                        fullWidth
+                        autoFocus
+                        name="password"
+                        margin="normal"
+                        label="password"
+                        type={"password"}
+                        value={password}
+                        onChange={handleChange('password')}
+                    />
 
-            <div className="form-group">
-                <label className="text-muted">Password</label>
-                <input onChange={handleChange('password')} type="password" className="form-control" value={password}/>
+                    <TextField
+                        variant="outlined"
+                        fullWidth
+                        autoFocus
+                        name="confirmPassword"
+                        margin="normal"
+                        type={"password"}
+                        label="confirm password"
+                        value={confirmPassword}
+                        onChange={handleChange('confirmPassword')}
+                    />
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        className={classes.submit}
+                        onClick={clickSubmit}
+                    >
+                        Register
+                    </Button>
+                </form>
+                <p className="my-1">
+                    Already have an account? <Link to="/signin">Sign In</Link>
+                </p>
             </div>
-            <div className="form-group">
-                <label className="text-muted">Confirm Password</label>
-                <input onChange={handleChange('confirmPassword')} type="password" className="form-control"
-                       value={confirmPassword}/>
-            </div>
-            <button onClick={clickSubmit} className="btn btn-primary">
-                Submit
-            </button>
-        </form>
+        </Container>
     );
 
     const showError = () => (

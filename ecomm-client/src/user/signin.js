@@ -15,6 +15,12 @@ import {authenticate, signin, isAuthenticated} from "../auth/user";
 
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import InputLabel from "@material-ui/core/InputLabel";
+import Input from "@material-ui/core/Input";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 const useStyles = makeStyles((theme) => ({
     root: {},
@@ -47,11 +53,12 @@ const SignIn = () => {
     const [formData, setFormData] = useState({
         email: 'silvinpradhan95@gmail.com',
         password: 'Invoker200695@@',
+        showPassword: false,
         loading: false,
         error: '',
         redirectToReferrer: false
     });
-    const {email, password, loading, error, redirectToReferrer} = formData;
+    const {email, password, loading, error, showPassword, redirectToReferrer} = formData;
     const {user} = isAuthenticated()
     const change = (e) =>
         setFormData({
@@ -87,10 +94,14 @@ const SignIn = () => {
             }
         })
     };
-    //redirect if logged in
-    // if (isAuthenticated) {
-    //     return <Redirect to="/"></Redirect>;
-    // }
+
+    const handleClickShowPassword = () => {
+        setFormData({...formData, showPassword: showPassword ? false : true})
+    }
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault()
+    }
 
     const showError = () => (
         <div style={{display: error ? '' : 'none'}}>
@@ -144,20 +155,41 @@ const SignIn = () => {
                         }}
                     ></TextField>
 
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        label="password"
-                        fullWidth
-                        autoFocus
-                        type="password"
-                        placeholder="Password"
-                        name="password"
+                    <InputLabel htmlFor="standard-adornment-password">
+                        Password
+                    </InputLabel>
+                    <Input
+                        type={showPassword ? "text" : "password"}
+                        onChange={(e) => change(e)}
                         value={password}
-                        onChange={(e) => {
-                            change(e);
-                        }}
-                    ></TextField>
+                        name="password"
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                >
+                                    {showPassword ? <Visibility/> : <VisibilityOff/>}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                        fullWidth
+                    />
+
+                    {/*<TextField*/}
+                    {/*    variant="outlined"*/}
+                    {/*    margin="normal"*/}
+                    {/*    label="password"*/}
+                    {/*    fullWidth*/}
+                    {/*    autoFocus*/}
+                    {/*    type="password"*/}
+                    {/*    placeholder="Password"*/}
+                    {/*    name="password"*/}
+                    {/*    value={password}*/}
+                    {/*    onChange={(e) => {*/}
+                    {/*        change(e);*/}
+                    {/*    }}*/}
+                    {/*></TextField>*/}
                     <Button
                         type="submit"
                         fullWidth

@@ -3,21 +3,26 @@ const jwt = require('jsonwebtoken') // generate signed token
 const expressJWT = require('express-jwt') // for authorization
 const {errorHandler} = require('../helpers/dbErrorHandler')
 
-exports.signup = (req, res) => {
+exports.signup = async (req, res) => {
     console.log("req body", req.body);
-    const user = new Auth(req.body);
-    user.save((err, user) => {
-        if (err) {
-            return res.status(400).json({
-                err
+    const exists = await Auth.findOne({username: req.body.username})
+    if (exists) {
+        return res.json({error: "Username already taken. Try a new one."})
+    } else {
+        const user = new Auth(req.body);
+        user.save((error, user) => {
+            if (error) {
+                return res.status(400).json({
+                    error: errorHandler(error)
+                })
+            }
+            user.salt = undefined
+            user.hashed_password = undefined
+            res.json({
+                user
             })
-        }
-        user.salt = undefined
-        user.hashed_password = undefined
-        res.json({
-            user
         })
-    })
+    }
 }
 
 exports.signin = (req, res) => {

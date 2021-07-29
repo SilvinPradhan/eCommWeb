@@ -14,7 +14,7 @@ const Search = () => {
     const {categories, category, search, results, searched} = data;
 
     const loadCategories = () => {
-       return getCategories().then(data => {
+        return getCategories().then(data => {
             if (data.error) {
                 console.log(data.error);
             } else {
@@ -116,8 +116,8 @@ const Search = () => {
 
     return (
         <div className="row">
-            <div className="container mb-3">{searchForm()}</div>
-            <div className="container-fluid mb-3">
+            <div className="container mb-1">{searchForm()}</div>
+            <div className="container-fluid mb-1">
                 {searchedProducts(results)}
             </div>
         </div>

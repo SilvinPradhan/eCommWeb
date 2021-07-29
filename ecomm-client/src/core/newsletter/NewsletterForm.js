@@ -61,12 +61,12 @@ const NewsletterForm = ({status, message, onValidated}) => {
             <h4 className="mb-1 uppercase font-bold d-flex justify-content-center"
                 style={{fontFamily: "Bebas Neue", letterSpacing: '1.3px'}}>Subscribe to Newsletter</h4>
             <div className="d-flex justify-content-center newsletter-input-fields">
-                <div className="field-group">
+                <div className="field-group form-group col-md-3">
                     <input
                         onChange={(event) => setEmail(event?.target?.value ?? '')}
                         type="email"
                         placeholder="Enter Email Address"
-                        className="appearance-none rounded-right rounded-left sm:rounded-left-none border border-gray-400 border-b block pl-4 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none"
+                        className=" form-control appearance-none rounded-right rounded-left sm:rounded-left-none border border-gray-400 border-b block pl-4 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none"
                         onKeyUp={(event) => handleInputKeyEvent(event)}
                     />
                 </div>

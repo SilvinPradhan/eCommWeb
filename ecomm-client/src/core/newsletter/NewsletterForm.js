@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {Button} from "@material-ui/core";
+import {sanitize} from "../../utils/miscellaneous";
 
 const NewsletterForm = ({status, message, onValidated}) => {
 
@@ -49,10 +50,10 @@ const NewsletterForm = ({status, message, onValidated}) => {
         }
         const result = message?.split('-') ?? null;
         if ("0" !== result?.[0]?.trim()) {
-            return message;
+            return sanitize(message);
         }
         const formattedMessage = result?.[1]?.trim() ?? null;
-        return formattedMessage ? formattedMessage : null;
+        return formattedMessage ? sanitize(formattedMessage) : null;
     }
 
     return (
@@ -88,7 +89,7 @@ const NewsletterForm = ({status, message, onValidated}) => {
                 ) : null}
                 {'success' === status && 'error' !== status && !error && (
                     <div className="text-green-200 font-bold pt-2"
-                         dangerouslySetInnerHTML={{__html: message}}/>
+                         dangerouslySetInnerHTML={{__html: sanitize(message)}}/>
                 )}
             </div>
         </div>

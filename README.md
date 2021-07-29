@@ -15,6 +15,7 @@ Contents
  * [Cloning](#cloning)
  * [Installation](#installation)
  * [File Structure](#structure)
+ * [Integration](#mailchimp)
  <hr />
  
 ## Cloning ##
@@ -139,6 +140,11 @@ ecomm-client/
     │   │   └── CheckBox.js
     │   ├── checkout
     │   │   └── Checkout.js
+    │   ├── loading
+    │   │   └── loading.js
+    │   ├── newsletter
+    │   │   ├── NewsletterForm.js
+    │   │   └── NewsletterSubscribe.js
     │   ├── price
     │   │   └── FixedPrice.js
     │   ├── product
@@ -161,14 +167,34 @@ ecomm-client/
     │       └── categoryBG
     │           └── bg.jpg
     ├── style.css
-    └── user
-        ├── AdminDashboard.js
-        ├── Profile.js
-        ├── UserDashboard.js
-        ├── apiUser.js
-        ├── signin.js
-        └── signup.js
+    ├── user
+    │   ├── AdminDashboard.js
+    │   ├── Profile.js
+    │   ├── UserDashboard.js
+    │   ├── apiUser.js
+    │   ├── signin.js
+    │   └── signup.js
+    └── utils
+        └── miscellaneous.js
+        
 ```
+## Integration ##
+
+Send newsletter to connect with your audience? Maybe your application has `user` signup functionality and you have a great database of emails. In this case, there are ways to take advantage of that database and use this column to create your contact list directly. And maybe your web application does not require sign up and you're not capturing those that come to your website. It is vital to have an easy and quick access to form a contact list and stay connected with your audience/customers. This is all possible with integrating `Mailchimp` which does all of the heavy lifting for you.
+
+### Steps to integrate Mailchimp ###
+[Optional]
+
+1. Get to Mailchimp's site and sign up for a free account <a href="https://login.mailchimp.com/signup/">here</a>. 
+2. Go the terminal of the `frontend` directory of your project, and run the following command:
+   ``` $ npm i react-mailchimp-form ```
+3. In your Mailchimp navigate to your dashboard, and to your ‘Audience’ tab. You’ll need to make sure that you have your contact list initiated.
+4. Copy the HTML and extract the action from “Signup Forms > Embedded forms”. <br />
+`` Note: 
+This ‘Signup Form’ can be navigated to from the Audience Tab, as well. While in ‘Embedded forms’ you’ll see the section in the right column ‘Copy/paste onto your site’. ``
+5. Do not copy the whole block of code, but the following string in `<form action="COPY_MAILCHIMP_URL" />` <br />
+6. In the client side directory, navigate to `.env` file and paste the copied string (COPY_MAILCHIMP_URL) into a new environment variable, i.e, REACT_APP_MAILCHIMP_URL='COPY_MAILCHIMP_URL'.
+7. 
 
 **Deploy this FullStack Ecommerce app to Digital Ocean cloud servers, Add a Domain name and use Cloudflare's CDN to your application along with free SSL.** 	:rocket:
 

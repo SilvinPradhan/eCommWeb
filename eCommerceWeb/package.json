@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^7.4.5",
     "body-parser": "^1.19.0",
     "braintree": "^3.6.0",
     "cookie-parser": "^1.4.5",

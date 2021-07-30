@@ -213,7 +213,7 @@ audience/customers. This is all possible with integrating `Mailchimp` which does
    `` Note:
    This ‘Signup Form’ can be navigated to from the Audience Tab, as well. While in ‘Embedded forms’ you’ll see the section in the right column ‘Copy/paste onto your site’. ``
 5. Do not copy the whole block of code, but the following string in `<form action="COPY_MAILCHIMP_URL" />` <br />
-   <img src="650" height="450" src="https://user-images.githubusercontent.com/52342206/127592130-326e5f17-e62f-47fa-a339-9dc4e392cde6.png" />
+   <img src="https://user-images.githubusercontent.com/52342206/127592130-326e5f17-e62f-47fa-a339-9dc4e392cde6.png" width="650" height="450" />
 6. In the client side directory, navigate to `.env` file and paste the copied string (COPY_MAILCHIMP_URL) into a new
    environment variable, i.e, REACT_APP_MAILCHIMP_URL='COPY_MAILCHIMP_URL'.
    <img src="https://user-images.githubusercontent.com/52342206/127592403-9a514d02-a3f7-4b95-9c58-be8c590440f4.png" width="650" height="450" />

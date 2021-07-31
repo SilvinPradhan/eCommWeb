@@ -1,5 +1,7 @@
 const {Order, CartItem} = require('../models/order')
 const {errorHandler} = require('../helpers/dbErrorHandler')
+const sendgridMail = require('@sendgrid/mail')
+sendgridMail.setApiKey(`${process.env.SENDGRID_KEY}`)
 
 exports.orderById = (req, res, next, id) => {
     Order.findById(id)
@@ -25,6 +27,75 @@ exports.create = (req, res) => {
                 error: errorHandler(error)
             })
         }
+        console.log('Order has just been saved to the database', order);
+        // send email alert to admin
+        // order.address
+        // order.products.length
+        // order.amount
+        const emailData = {
+            to: 'techline2006@gmail.com', // admin
+            from: 'noreply@techline.com',
+            subject: `A new order is received!`,
+            html: `
+                <h1>Hey Admin, a customer just made a purchase in eCommWeb</h1>
+                <h2>Customer name: ${order.user.name}</h2>
+                <h2>Customer address: ${order.address}</h2>
+                <h2>User's purchase history: ${order.user.history.length}</h2>
+                <h2>User's email: ${order.user.email}</h2>
+                <h2>Total products: ${order.products.length}</h2>
+                <h2>Transaction ID: ${order.transaction_id}</h2>
+                <h2>Order Status: ${order.status}</h2>
+                <h2>Product Details:</h2>
+                <hr />
+                ${
+                order.products.map(p => {
+                    return `
+                        <div>
+                        <h3>Product Name: ${p.name}</h3>
+                        <h3>Product Price: ${p.price}</h3>
+                        <h3>Product Quantity: ${p.count}</h3>
+                        </div>
+                    `;
+                }).join('_____________________________')
+            }
+                <h2>Total order cost: ${order.amount}</h2>
+                <p><a>Login to your dashboard</a> to see the order in detail</p>
+            `
+        };
+        sendgridMail.send(emailData)
+            .then(sent => console.log('Email Admin >>>', sent))
+            .catch(err => console.log('ERR >>>', err))
+        // Email alert to the buyer
+        const emailData2 = {
+            to: order.user.email,
+            from: 'noreply@techline.com',
+            subject: `Your order is in process`,
+            html: `
+                <h1>Hey ${req.profile.name}, thank you for shopping with eCommWeb.</h1>
+                <h2>Details of the order/s </h2>
+                <h3>Total products: ${order.products.length}</h3>
+                <h3>Transaction ID: ${order.transaction_id}</h3>
+                <h3>Order Status: ${order.status}</h3>
+                <h3>Product details:</h3>
+                <hr />
+                ${
+                order.products.map(p => {
+                    return `
+                        <div>
+                            <h4>Product Name: ${p.name}</h4>
+                            <h4>Product Price: ${p.price}</h4>
+                            <h4>Product Quantity: ${p.count}</h4>
+                        </div>
+                    `;
+                }).join('_____________________________')
+            }
+                <h2>Total order cost: ${order.amount}</h2>
+                <p>Thank you for shopping with us.</p>
+            `
+        };
+        sendgridMail.send(emailData2)
+            .then(sent => console.log('Email Buyer: ', sent))
+            .catch(err => console.log('Error: ', err))
         res.json(data)
     })
 }

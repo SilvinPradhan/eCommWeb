@@ -17,9 +17,9 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faSignInAlt, faUserPlus, faShoppingBag, faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
-
 import {signout, isAuthenticated} from "../auth/user";
 import {productTotal} from "./cart/cartHandler";
+import LOGO from '../static/images/logo.png'
 import {faShoppingCart} from "@fortawesome/free-solid-svg-icons/faShoppingCart";
 
 const drawerWidth = 170;
@@ -164,7 +164,7 @@ const Header = ({history}) => {
                     </div>
                     <Typography variant="h5" className={classes.title}>
                         <Link to="/" className={classes.linkstyle} style={isActive(history, '/')}>
-                            {/*<FontAwesomeIcon icon={faShoppingBag} aria-hidden={true}/>{' '}*/}
+                            <img src={LOGO} width={"25px"} height={"25px"}/>
                             eComm
                         </Link>
                     </Typography>

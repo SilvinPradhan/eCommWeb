@@ -86,7 +86,7 @@ eCommerceWeb/
 │   └── user.js
 ├── helpers
 │   └── dbErrorHandler.js
-├── index.js
+├── loading.js
 ├── models
 │   ├── category.js
 │   ├── order.js
@@ -102,7 +102,7 @@ eCommerceWeb/
 │   ├── product.js
 │   └── user.js
 └── validator
-    └── index.js
+    └── loading.js
 ```
 
 2. Frontend Directory Tree
@@ -167,7 +167,7 @@ ecomm-client/
     │   │   └── Search.js
     │   └── shop
     │       └── Shop.js
-    ├── index.js
+    ├── loading.js
     ├── reportWebVitals.js
     ├── routes
     │   └── routes.js

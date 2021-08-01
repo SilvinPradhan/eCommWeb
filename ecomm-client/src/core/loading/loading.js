@@ -24,3 +24,5 @@ const Loading = ({message, classes, contentColorClass, showSpinner, showMessage,
         </div>
     );
 };
+
+export default Loading;

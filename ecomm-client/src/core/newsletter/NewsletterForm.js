@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {Button} from "@material-ui/core";
 import {sanitize} from "../../utils/miscellaneous";
+import Loading from '../loading/loading'
 
 const NewsletterForm = ({status, message, onValidated}) => {
 
@@ -80,7 +81,8 @@ const NewsletterForm = ({status, message, onValidated}) => {
                 </div>
             </div>
             <div className="min-h-42px justify-content-center d-flex">
-                {'sending' === status ? <span className={"container"}>Loading</span> : null}
+                {'sending' === status ? <Loading showSpinner message={"Sending..."} contentColorClass="text-white"
+                                                 hasVisibilityToggle={false}/> : null}
                 {'error' === status || error ? (
                     <div
                         className="text-danger pt-2"

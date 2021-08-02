@@ -1,0 +1,76 @@
+$border-color-default: #e4e6eb;
+$border-default: 1px solid $border-color-default;
+
+.footer {
+  flex-shrink: 0;
+  border-top: $border-default;
+}
+
+.footer-content {
+  padding-top: 20px;
+  margin: 0 auto;
+}
+
+/*
+ * Social Icons
+ */
+
+.footer-social-item {
+  text-align: center;
+
+  span,
+  a {
+    display: inline-block;
+    vertical-align: top;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  li {
+    padding-bottom: 8px;
+    margin: 0 auto;
+    display: inline-block;
+
+    a {
+      margin-left: 10px;
+    }
+  }
+
+  .facebook-icon {
+    background-image: url("https://image.flaticon.com/icons/png/512/174/174848.png");
+    width: 40px;
+    height: 40px;
+    background-size: 100%;
+  }
+
+  .instagram-icon {
+    background-image: url("https://image.flaticon.com/icons/png/512/174/174855.png");
+    width: 40px;
+    height: 40px;
+    background-size: 100%;
+  }
+
+  .github-icon {
+    background-image: url("https://image.flaticon.com/icons/png/512/25/25657.png");
+    width: 40px;
+    height: 40px;
+    background-size: 100%;
+  }
+
+  .linkedin-icon {
+    background-image: url("https://image.flaticon.com/icons/png/512/1409/1409945.png");
+    width: 40px;
+    height: 40px;
+    background-size: 100%;
+  }
+}
+
+/*
+ * Copyright
+ */
+.footer-copyright {
+  text-align: center;
+  padding: 16px 0px;
+}

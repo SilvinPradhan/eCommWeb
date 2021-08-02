@@ -35,7 +35,20 @@ const Home = () => {
     useEffect(() => {
         loadProductByArrival()
         loadProductBySell()
+        // document.addEventListener('keydown', handleTabbing);
+        // document.addEventListener('mousedown', handleMouseDown);
     }, [])
+
+    function handleTabbing(e) {
+        if (e.keyCode() === 40) {
+            document.body.classList.add('user-is-tabbing')
+            console.log('keydown')
+        }
+    }
+
+    function handleMouseDown() {
+        document.body.classList.remove('user-is-tabbing');
+    }
 
     return (
         <>

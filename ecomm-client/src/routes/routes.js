@@ -6,6 +6,7 @@ import SignUp from "../user/signup";
 import SignIn from "../user/signin";
 import Home from "../core/Home";
 import Header from "../core/Header";
+import Footer from "../core/footer/Footer"
 import Cart from "../core/cart/Cart";
 
 import {ToastContainer} from 'react-toastify';
@@ -53,6 +54,7 @@ const Routes = () => {
                     </Switch>
                 </>
             )}/>
+            <Footer/>
 
         </BrowserRouter>
     )

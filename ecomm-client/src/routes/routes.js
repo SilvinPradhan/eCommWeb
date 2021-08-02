@@ -7,6 +7,7 @@ import SignIn from "../user/signin";
 import Home from "../core/Home";
 import Header from "../core/Header";
 import Footer from "../core/footer/Footer"
+import ContactUs from "../core/contactus/ContactUs"
 import Cart from "../core/cart/Cart";
 
 import {ToastContainer} from 'react-toastify';
@@ -37,6 +38,7 @@ const Routes = () => {
                         <Route path="/shop" exact component={Shop}/>
                         <Route path="/signin" exact component={SignIn}/>
                         <Route path="/signup" exact component={SignUp}/>
+                        <Route path='/getintouch' exact component={ContactUs}/>
                         <PrivateRoute path={"/user/dashboard"} exact component={UserDashboard}/>
                         <AdminRoute path={"/admin/dashboard"} exact component={AdminDashboard}/>
                         <AdminRoute path={"/create/category"} exact component={AddCategory}/>

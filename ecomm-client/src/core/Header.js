@@ -21,6 +21,7 @@ import {signout, isAuthenticated} from "../auth/user";
 import {productTotal} from "./cart/cartHandler";
 import LOGO from '../static/images/logo.png'
 import {faShoppingCart} from "@fortawesome/free-solid-svg-icons/faShoppingCart";
+import {faMailBulk} from "@fortawesome/free-solid-svg-icons/faMailBulk";
 
 const drawerWidth = 170;
 const useStyles = makeStyles((theme) => ({
@@ -141,6 +142,14 @@ const Header = ({history}) => {
                                 </ListItem>
                                 <ListItem button>
                                     <Typography className={classes.menuText}>
+                                        <Link to="/getintouch" className={classes.linkstyle}>
+                                            <FontAwesomeIcon icon={faMailBulk} aria-hidden={true}/>  &nbsp;
+                                            <span>Contact Us</span>{' '}
+                                        </Link>
+                                    </Typography>
+                                </ListItem>
+                                <ListItem button>
+                                    <Typography className={classes.menuText}>
                                         <Link to="/signup" className={classes.linkstyle}>
                                             {' '}
                                             <FontAwesomeIcon icon={faUserPlus} aria-hidden={true}/>  &nbsp;
@@ -176,6 +185,13 @@ const Header = ({history}) => {
                             </Link>
                         </Typography>
 
+                        <Typography className={classes.menuText}>
+                            <Link to="/getintouch" className={classes.linkstyle}
+                                  style={isActive(history, '/getintouch')}>
+                                <FontAwesomeIcon icon={faMailBulk} aria-hidden={true}/>{' '}
+                                <span>Contact Us</span>{' '}
+                            </Link>
+                        </Typography>
                         <Typography className={classes.menuText}>
                             <Link to="/signup" className={classes.linkstyle}
                                   style={isActive(history, '/signup')}>
@@ -247,6 +263,15 @@ const Header = ({history}) => {
                                     </Link>
                                 </Typography>
                             </ListItem>
+                            <ListItem button>
+                                <Typography className={classes.menuText}>
+                                    <Link to="/getintouch" className={classes.linkstyle}
+                                          style={isActive(history, '/getintouch')}>
+                                        <FontAwesomeIcon icon={faMailBulk} aria-hidden={true}/>{' '}
+                                        <span>Contact us</span>{' '}
+                                    </Link>
+                                </Typography>
+                            </ListItem>
 
                             {
                                 isAuthenticated() && isAuthenticated().user.role === 0 && (
@@ -297,6 +322,12 @@ const Header = ({history}) => {
                         <Link to="/shop" className={classes.linkstyle} style={isActive(history, '/shop')}>
                             <FontAwesomeIcon icon={faShoppingBag} aria-hidden={true}/>{' '}
                             <span>Shop</span>{' '}
+                        </Link>
+                    </Typography>
+                    <Typography className={classes.menuText}>
+                        <Link to="/getintouch" className={classes.linkstyle} style={isActive(history, '/getintouch')}>
+                            <FontAwesomeIcon icon={faMailBulk} aria-hidden={true}/>{' '}
+                            <span>Contact Us</span>{' '}
                         </Link>
                     </Typography>
                     {

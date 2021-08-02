@@ -18,6 +18,7 @@ const categoryRoutes = require('./routes/category')
 const productRoutes = require('./routes/product')
 const paymentRoutes = require('./routes/braintree')
 const orderRoutes = require('./routes/order')
+const formRoutes = require('./routes/form')
 
 // APP
 const app = express();
@@ -48,6 +49,7 @@ app.use('/api', categoryRoutes);
 app.use('/api', productRoutes);
 app.use('/api', paymentRoutes);
 app.use('/api', orderRoutes)
+app.use('/api', formRoutes)
 
 app.get('/', (req, res) => {
     res.json({message: 'You just hit the End Point'});

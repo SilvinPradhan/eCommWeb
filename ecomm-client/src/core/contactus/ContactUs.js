@@ -1,10 +1,24 @@
 import React, {useState} from 'react'
 import {Link} from "react-router-dom";
 import {emailContactForm} from '../../actions/form'
-import {Container, Grid, Input, TextareaAutosize, TextField} from '@material-ui/core'
+import {Grid, TextareaAutosize, TextField, Paper, Container} from '@material-ui/core'
 import {TextFieldsSharp} from "@material-ui/icons";
+import {makeStyles} from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+        marginBottom: '10px'
+    },
+    paper: {
+        padding: theme.spacing(2),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    },
+}));
 
 const ContactUs = () => {
+    const classes = useStyles();
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -12,43 +26,48 @@ const ContactUs = () => {
 
     return (
         <React.Fragment>
-            <div className={'contact'}>
-                <h4>Contact Information</h4>
+            <div className={classes.root}>
+                <h4 className="text-align-center justify-content-center mt-2 mb-2">Contact Information</h4>
                 <hr/>
-                <form onSubmit={handleSubmit}>
-                    <Container>
-                        <Grid xs={"12"} md={"6"}>
-                            <TextField variant="outlined"
-                                       margin="normal"
-                                       label="Name"
-                                       name="name"
-                                       fullWidth
-                                       autoFocus/>
+                <Container>
+                    <form onSubmit={handleSubmit}>
+                        <Grid item container spacing={3}>
+                            <Grid item xs={12} sm={6}>
+                                <Paper className={classes.paper}>
+                                    <TextField style={{width: '40vw'}} variant="outlined"
+                                               margin="normal"
+                                               label="Name"
+                                               name="name"
+                                               fullwidth={"true"}
+                                               autoFocus/>
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <Paper className={classes.paper}>
+                                    <TextField style={{width: '40vw'}}
+                                               variant="outlined"
+                                               margin="normal"
+                                               label="Email"
+                                               name="email"
+                                               fullwidth={"true"}
+                                               autoFocus/>
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Paper className={classes.paper}>
+                                    <TextareaAutosize style={{width: '60vw', height: '70px'}} variant="outlined"
+                                                      margin="auto"
+                                                      label="Message"
+                                                      placeholder={"Leave a Message"}
+                                                      name="message"
+                                                      fullwidth={"true"}
+                                                      autoFocus/>
+                                </Paper>
+                            </Grid>
                         </Grid>
-                    </Container>
-                    <Container>
-                        <Grid xs={"12"} md={"6"}>
-                            <TextField variant="outlined"
-                                       margin="normal"
-                                       label="Email"
-                                       name="email"
-                                       fullWidth
-                                       autoFocus/>
-                        </Grid>
-                    </Container>
-                    <Container>
-                        <Grid xs={"12"} md={"12"}>
-                            <TextareaAutosize style={{width: '60vw', height: '50px'}} variant="outlined"
-                                              margin="normal"
-                                              label="Message"
-                                              placeholder={"Leave a Message"}
-                                              name="message"
-                                              fullWidth
-                                              autoFocus/>
-                        </Grid>
-                    </Container>
+                    </form>
+                </Container>
 
-                </form>
             </div>
         </React.Fragment>
     )

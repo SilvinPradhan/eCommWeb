@@ -33,8 +33,8 @@ exports.create = (req, res) => {
         // order.products.length
         // order.amount
         const emailData = {
-            to: 'techline2006@gmail.com', // admin
-            from: 'noreply@techline.com',
+            to: 'silvinpradhan95@gmail.com', // admin
+            from: 'techline2006@gmail.com',
             subject: `A new order is received!`,
             html: `
                 <h1>Hey Admin, a customer just made a purchase in eCommWeb</h1>
@@ -68,7 +68,7 @@ exports.create = (req, res) => {
         // Email alert to the buyer
         const emailData2 = {
             to: order.user.email,
-            from: 'noreply@techline.com',
+            from: 'techline2006@gmail.com',
             subject: `Your order is in process`,
             html: `
                 <h1>Hey ${req.profile.name}, thank you for shopping with eCommWeb.</h1>

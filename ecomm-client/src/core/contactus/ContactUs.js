@@ -1,33 +1,77 @@
 import React, {useState} from 'react'
 import {Link} from "react-router-dom";
 import {emailContactForm} from '../../actions/form'
-import {Grid, TextareaAutosize, TextField, Paper, Container} from '@material-ui/core'
+import {Grid, TextareaAutosize, TextField, Paper, Container, Typography, Button} from '@material-ui/core'
 import {TextFieldsSharp} from "@material-ui/icons";
 import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-        marginBottom: '10px'
+        marginBottom: '50px'
     },
     paper: {
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
+    button: {
+        margin: theme.spacing(1),
+    },
 }));
 
 const ContactUs = () => {
     const classes = useStyles();
+    const [values, setValues] = useState({
+        message: '',
+        name: '',
+        email: '',
+        sent: false,
+        buttonText: 'Send Message',
+        success: false,
+        error: false
+    });
+    const {message, name, email, sent, buttonText, success, error} = values;
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setValues({...values, buttonText: 'Sending...'});
+        emailContactForm({name, email, message}).then(data => {
+            if (data.error) {
+                setValues({...values, error: data.error});
+            } else {
+                setValues({
+                    ...values,
+                    sent: true,
+                    name: '',
+                    email: '',
+                    message: '',
+                    buttonText: 'Sent',
+                    success: data.success
+                });
+            }
+        });
     }
+    const handleChange = name => e => {
+        setValues({...values, [name]: e.target.value, error: false, success: false, buttonText: 'Send Message'});
+    };
+
+    const showSuccessMessage = () => success && <div className="alert alert-info">Thank you for contacting us.</div>;
+
+    const showErrorMessage = () => (
+        <div className="alert alert-danger" style={{display: error ? '' : 'none'}}>
+            {error}
+        </div>
+    );
 
     return (
         <React.Fragment>
             <div className={classes.root}>
-                <h4 className="text-align-center justify-content-center mt-2 mb-2">Contact Information</h4>
+                <div style={{display: "flex", justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}
+                     className="mb-2 mt-2">
+                    <h4>Contact Information</h4>
+                    <h6> You must not be a ROBOT</h6>
+                </div>
                 <hr/>
                 <Container>
                     <form onSubmit={handleSubmit}>
@@ -38,8 +82,12 @@ const ContactUs = () => {
                                                margin="normal"
                                                label="Name"
                                                name="name"
+                                               onChange={handleChange('name')}
+                                               value={name}
                                                fullwidth={"true"}
-                                               autoFocus/>
+                                               autoFocus
+                                               required
+                                    />
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -49,8 +97,10 @@ const ContactUs = () => {
                                                margin="normal"
                                                label="Email"
                                                name="email"
+                                               onChange={handleChange('email')}
+                                               value={email}
                                                fullwidth={"true"}
-                                               autoFocus/>
+                                               autoFocus required/>
                                 </Paper>
                             </Grid>
                             <Grid item xs={12}>
@@ -61,13 +111,21 @@ const ContactUs = () => {
                                                       placeholder={"Leave a Message"}
                                                       name="message"
                                                       fullwidth={"true"}
-                                                      autoFocus/>
+                                                      autoFocus
+                                                      value={message}
+                                                      onChange={handleChange('message')}
+                                                      required/>
                                 </Paper>
                             </Grid>
+                            <Button variant="contained"
+                                    color="default"
+                                    fullWidth={true}
+                                    size={"large"}
+                                    className={classes.button} type='submit'>{buttonText}
+                            </Button>
                         </Grid>
                     </form>
                 </Container>
-
             </div>
         </React.Fragment>
     )

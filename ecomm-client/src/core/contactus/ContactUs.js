@@ -1,8 +1,6 @@
 import React, {useState} from 'react'
-import {Link} from "react-router-dom";
 import {emailContactForm} from '../../actions/form'
 import {Grid, TextareaAutosize, TextField, Paper, Container, Typography, Button} from '@material-ui/core'
-import {TextFieldsSharp} from "@material-ui/icons";
 import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -24,26 +22,26 @@ const ContactUs = () => {
     const classes = useStyles();
     const [values, setValues] = useState({
         message: '',
-        name: '',
+        firstName: '',
         email: '',
         sent: false,
         buttonText: 'Send Message',
         success: false,
-        error: false
+        error: ''
     });
-    const {message, name, email, sent, buttonText, success, error} = values;
+    const {message, firstName, email, sent, buttonText, success, error} = values;
 
     const handleSubmit = (e) => {
         e.preventDefault()
         setValues({...values, buttonText: 'Sending...'});
-        emailContactForm({name, email, message}).then(data => {
+        emailContactForm({firstName, email, message}).then(data => {
             if (data.error) {
-                setValues({...values, error: data.error});
+                return setValues({...values, error: data.error});
             } else {
-                setValues({
+                return setValues({
                     ...values,
                     sent: true,
-                    name: '',
+                    firstName: '',
                     email: '',
                     message: '',
                     buttonText: 'Sent',
@@ -81,9 +79,9 @@ const ContactUs = () => {
                                     <TextField style={{width: '40vw'}} variant="outlined"
                                                margin="normal"
                                                label="Name"
-                                               name="name"
-                                               onChange={handleChange('name')}
-                                               value={name}
+                                               name="firstName"
+                                               onChange={handleChange('firstName')}
+                                               value={firstName}
                                                fullwidth={"true"}
                                                autoFocus
                                                required
@@ -118,8 +116,7 @@ const ContactUs = () => {
                                 </Paper>
                             </Grid>
                             <Button variant="contained"
-                                    color="default"
-                                    fullWidth={true}
+                                    color="primary"
                                     size={"large"}
                                     className={classes.button} type='submit'>{buttonText}
                             </Button>

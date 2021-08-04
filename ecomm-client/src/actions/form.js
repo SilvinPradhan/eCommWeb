@@ -4,7 +4,7 @@ import {API} from "../config";
 export const emailContactForm = (data) => {
     let emailEndpoint;
     emailEndpoint = `${API}/contact`
-    return fetch(`{emailEndpoint}`, {
+    return fetch(`${API}/contact`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -14,5 +14,5 @@ export const emailContactForm = (data) => {
     }).then(response => {
         return response.json();
     })
-        .catch(err => console.log(err));
+        .catch(error => console.log(error));
 }

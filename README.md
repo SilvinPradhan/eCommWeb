@@ -11,6 +11,9 @@ Node) :shopping:
 [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
 [![License](https://img.shields.io/badge/license-CC0-blue.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
 
+## Become a Patron by supporting my work ##
+If you guys like my work, please do support my work by becoming a patron here: <br />
+ https://www.patreon.com/ghostDragoon95
 
 Contents
 ========
@@ -403,4 +406,3 @@ Output
 
 5. If there is no error, enable MongoDB service to start up at boot:
    ``` sudo systemctl enable mongod```
-

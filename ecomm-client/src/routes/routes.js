@@ -26,7 +26,13 @@ import ManageProducts from "../admin/ManageProducts";
 import UpdateProduct from "../admin/UpdateProduct";
 import PageNotFound from "../404/PageNotFound";
 
+// Google Analytics
+import useGaTracker from "../google-analytics/ga";
+
 const Routes = () => {
+
+    useGaTracker()
+
     return (
         <BrowserRouter>
             <ToastContainer/>

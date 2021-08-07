@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-    BrowserRouter, Switch, Route,
+    BrowserRouter as Router, Switch, Route,
 } from "react-router-dom";
 import SignUp from "../user/signup";
 import SignIn from "../user/signin";
@@ -34,7 +34,7 @@ const Routes = () => {
     useGaTracker()
 
     return (
-        <BrowserRouter>
+        <>
             <ToastContainer/>
             <Header/>
             <Route render={({location}) => (
@@ -63,8 +63,7 @@ const Routes = () => {
                 </>
             )}/>
             <Footer/>
-
-        </BrowserRouter>
+        </>
     )
 }
 

@@ -2,8 +2,8 @@ import {useEffect, useState} from "react";
 import {useLocation} from 'react-router-dom'
 import ReactGA from 'react-ga'
 
-const useGaTracker = () => {
-    const location = useLocation();
+function useGaTracker() {
+    let location = useLocation();
     const [start, setStart] = useState(false);
 
     useEffect(() => {

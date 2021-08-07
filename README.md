@@ -3,7 +3,7 @@
 [![SilvinPradhan's GitHub stats](https://github-readme-stats.vercel.app/api?username=SilvinPradhan)](https://github.com/anuraghazra/github-readme-stats)
 
 [FullStack] E-Commerce Shopping Platform developed using the modern technology stacks, MERN (MongoDB, Express, React,
-Node) :shopping:
+Node), MailChimp, Google Analytics, Braintree(PayPal) :shopping:
 
 [![Build Status](https://travis-ci.com/alichtman/shallow-backup.svg?branch=master)](https://travis-ci.com/alichtman/shallow-backup)
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
@@ -204,6 +204,7 @@ ecomm-client/
 * Mongoose
 * React
 * Webpack
+* Google Analytics
 
 ## Integration ##
 

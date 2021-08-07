@@ -21,6 +21,14 @@ import {
 import {makeStyles} from '@material-ui/core/styles';
 
 import validator from "validator/es";
+import ReactGA from "react-ga";
+
+/**
+ * Event - Add custom tracking event.
+ * @param {string} category
+ * @param {string} action
+ * @param {string} label
+ */
 
 const useStyles = makeStyles((theme) => ({
     root: {},
@@ -46,12 +54,6 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3, 0, 2),
         backgroundColor: '#264653',
     },
-    // textContainer: {
-    //     display: 'flex',
-    //     flexDirection: 'inline',
-    //     alignItems: 'center',
-    //     justifyContent: 'space-between'
-    // }
 }));
 
 const Signup = () => {
@@ -91,10 +93,6 @@ const Signup = () => {
         event.preventDefault()
     }
 
-    // const handlePasswordChange = (prop) => (event) => {
-    //     setValues({...values, [prop]: event.target.value});
-    // };
-
     const handleChange = name => event => {
         setValues({...values, error: '', [name]: event.target.value});
     };
@@ -131,13 +129,14 @@ const Signup = () => {
                     draggable: true,
                     progress: undefined,
                 });
+                //  measure how many times the button was clicked vs how many users actually signed up
+                ReactGA.event({
+                    category: "Sign Up",
+                    action: "User pressed the big blue sign up button",
+                });
             }
         });
     };
-
-    const showHide = () => {
-
-    }
 
     const signUpForm = () => (
 

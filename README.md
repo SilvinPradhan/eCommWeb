@@ -255,9 +255,9 @@ What can we do with Google Analytics?
     * Fill up the required name and other details and provide the URL of your website. <br/>
     [ Important ] <br/>
     Be sure to click on the Advanced Settings and turn on the Create Universal
-   <img src="https://miro.medium.com/max/1400/1*cIfHIh_jnDAZdBZY5ZD2aQ.png" width="650" height="550"/>
+   <img src="https://miro.medium.com/max/1400/1*cIfHIh_jnDAZdBZY5ZD2aQ.png" width="950" height="550"/>
     * Then Select a property and get the tracking id and save it somewhere.
-   <img src="https://miro.medium.com/max/1400/1*Hj7AdusSGWj2152T2htKYQ.png" width="650" height="550"/>
+   <img src="https://miro.medium.com/max/1400/1*Hj7AdusSGWj2152T2htKYQ.png" width="950" height="550"/>
 3. Now you are done setting up your project in Google Analytics. If you have a live website you will start getting some insights about the visitors already.
 4. [React] Install Dependencies: 
     * First, install react-ga package from npm. It’s the official npm package for React integration with Google analytics. <br />

@@ -238,6 +238,56 @@ audience/customers. This is all possible with integrating `Mailchimp` which does
 9. Before pushing the code to the github repo, make sure TO MOVE YOUR ‘action=’ value to a .env file to hide your
    personal, secret mailchimp key.
 
+### Steps to integrate Google Analytics ###
+
+What can we do with Google Analytics?
+* You will be able to track your revenue,
+* Track user flow/traffic to your site,
+* Track your new user acquisition rate,
+* Even track which age-group are more interested in your business,
+* Also, you can gain insight into the region they live in.
+
+#### Steps ####
+
+1. Create an account in Google Accounts: <a src="https://analytics.google.com/analytics/web/">google.analytics.com</a> <br/> If you have already setup an Google Account, you just have to set up a new account and give it a name.
+2. Create a `property` <br/> Property is a way for Google to track your website. We need to create a new property for our website.
+    * Go to your dashboard and find `Admin` -> `Create New Property`
+    * Fill up the required name and other details and provide the URL of your website. <br/>
+    [ Important ] <br/>
+    Be sure to click on the Advanced Settings and turn on the Create Universal
+   <img src="https://miro.medium.com/max/1400/1*cIfHIh_jnDAZdBZY5ZD2aQ.png" width="650" height="550"/>
+    * Then Select a property and get the tracking id and save it somewhere.
+   <img src="https://miro.medium.com/max/1400/1*Hj7AdusSGWj2152T2htKYQ.png" width="650" height="550"/>
+3. Now you are done setting up your project in Google Analytics. If you have a live website you will start getting some insights about the visitors already.
+4. [React] Install Dependencies: 
+    * First, install react-ga package from npm. It’s the official npm package for React integration with Google analytics. <br />
+      `yarn add react-ga`
+      or
+      `npm i react-ga -S`
+5. Setup Google Analytics inside your React Project
+    * Inside `App.js` or `index.js`, add the following code: <br/>
+    `import ReactGA from 'react-ga';
+      const TRACKING_ID = "UA-12341234-1"; // YOUR_OWN_TRACKING_ID
+      ReactGA.initialize(TRACKING_ID);`
+6. Integration with React Router <br/>
+   We can create a RouteChangeTracker component to listen to the changes in route and send data back to Google Analytics <br/>
+    ```import React from 'react'
+   import { withRouter } from 'react-router-dom';
+   import ReactGA from 'react-ga';
+   const RouteChangeTracker = ({ history }) => {
+
+   history.listen((location, action) => {
+   ReactGA.set({ page: location.pathname });
+   ReactGA.pageview(location.pathname);
+   });
+
+   return <div></div>;
+   };
+    export default withRouter(RouteChangeTracker);
+    ```
+7. Do not forget to add the RouteChangeTracker component inside your App.js file.
+
+
 **Deploy this FullStack Ecommerce app to Digital Ocean cloud servers, Add a Domain name and use Cloudflare's CDN to your
 application along with free SSL.**    :rocket:
 

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import {emailContactForm} from '../../actions/form'
 import {Grid, TextareaAutosize, TextField, Paper, Container, Typography, Button} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles';
+import {API} from "../../config";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,33 +22,33 @@ const ContactUs = () => {
     const classes = useStyles();
     const [values, setValues] = useState({
         message: '',
-        firstName: '',
+        name: '',
         email: '',
+        subject: '',
         sent: false,
         buttonText: 'Send Message',
         success: false,
         error: ''
     });
-    const {message, firstName, email, sent, buttonText, success, error} = values;
+    const {message, name, email, subject, sent, buttonText, success, error} = values;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         setValues({...values, buttonText: 'Sending...'});
-        emailContactForm({firstName, email, message}).then(data => {
-            if (data.error) {
-                return setValues({...values, error: data.error});
-            } else {
-                return setValues({
-                    ...values,
-                    sent: true,
-                    firstName: '',
-                    email: '',
-                    message: '',
-                    buttonText: 'Sent',
-                    success: data.success
-                });
-            }
+        console.log({email, name, subject, message});
+        const response = await fetch(`${API}/contact`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({email, name, subject, message})
         });
+        const resData = await response.json();
+        if (resData.status === 'success') {
+            alert("Message Sent.");
+        } else if (resData.status === 'fail') {
+            alert("Message failed to send.")
+        }
     }
     const handleChange = name => e => {
         setValues({...values, [name]: e.target.value, error: false, success: false, buttonText: 'Send Message'});
@@ -70,18 +70,20 @@ const ContactUs = () => {
                     <h4>Contact Information</h4>
                     <h6> You must not be a ROBOT</h6>
                 </div>
+                {showErrorMessage()}
+                {showSuccessMessage()}
                 <hr/>
                 <Container>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} method={"POST"}>
                         <Grid item container spacing={3}>
                             <Grid item xs={12} sm={6}>
                                 <Paper className={classes.paper}>
                                     <TextField style={{width: '40vw'}} variant="outlined"
                                                margin="normal"
                                                label="Name"
-                                               name="firstName"
-                                               onChange={handleChange('firstName')}
-                                               value={firstName}
+                                               name="name"
+                                               onChange={handleChange('name')}
+                                               value={name}
                                                fullwidth={"true"}
                                                autoFocus
                                                required
@@ -97,6 +99,19 @@ const ContactUs = () => {
                                                name="email"
                                                onChange={handleChange('email')}
                                                value={email}
+                                               fullwidth={"true"}
+                                               autoFocus required/>
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <Paper className={classes.paper}>
+                                    <TextField style={{width: '40vw'}}
+                                               variant="outlined"
+                                               margin="normal"
+                                               label="Subject"
+                                               name="subject"
+                                               onChange={handleChange('subject')}
+                                               value={subject}
                                                fullwidth={"true"}
                                                autoFocus required/>
                                 </Paper>

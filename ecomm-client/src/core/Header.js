@@ -134,7 +134,8 @@ const Header = ({history}) => {
                             <List>
                                 <ListItem button>
                                     <Typography className={classes.menuText}>
-                                        <Link to="/shop" className={classes.linkstyle}>
+                                        <Link to="/shop" className={classes.linkstyle}
+                                              style={isActive(history, '/shop')}>
                                             <FontAwesomeIcon icon={faShoppingBag} aria-hidden={true}/>  &nbsp;
                                             <span>Shop</span>{' '}
                                         </Link>
@@ -179,7 +180,7 @@ const Header = ({history}) => {
                     </Typography>
                     <div className={classes.sectionDesktop}>
                         <Typography className={classes.menuText}>
-                            <Link to="/shop" className={classes.linkstyle}>
+                            <Link to="/shop" className={classes.linkstyle} style={isActive(history, '/shop')}>
                                 <FontAwesomeIcon icon={faShoppingBag} aria-hidden={true}/>{' '}
                                 <span>Shop</span>{' '}
                             </Link>

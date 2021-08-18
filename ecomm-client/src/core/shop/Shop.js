@@ -112,12 +112,12 @@ const Shop = () => {
             <ToastContainer/>
             <div className="row mt-2">
                 <div className="col-4">
-                    <h3>Categories</h3>
+                    <h4>Categories</h4>
                     <ul>
                         <CheckBox handleFilters={filters => handleFilters(filters, 'category')}
                                   categories={categories}/>
                     </ul>
-                    <h3>Filter by price range</h3>
+                    <h4>Filter by price range</h4>
                     <div>
                         <RadioBox handleFilters={filters => handleFilters(filters, 'price')}
                                   prices={prices}/>
@@ -126,7 +126,7 @@ const Shop = () => {
 
 
                 <div className="col-8">
-                    <h3 className={"mb-4"}> All Products</h3>
+                    <h4 className={"mb-4"}> All Products</h4>
                     <div className={"row"}>
                         {
                             filteredResults.map((product, index) => (

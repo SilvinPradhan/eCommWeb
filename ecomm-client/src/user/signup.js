@@ -22,6 +22,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 import validator from "validator/es";
 import ReactGA from "react-ga";
+import PasswordChecker from "../core/passwordchecker/PasswordChecker";
 
 /**
  * Event - Add custom tracking event.
@@ -194,37 +195,30 @@ const Signup = () => {
                         onChange={handleChange('email')}
                     ></TextField>
 
-                    {/*<TextField*/}
-                    {/*    variant="outlined"*/}
-                    {/*    fullWidth*/}
-                    {/*    autoFocus*/}
-                    {/*    name="password"*/}
-                    {/*    margin="normal"*/}
-                    {/*    label="Password"*/}
-                    {/*    type={"password"}*/}
-                    {/*    value={password}*/}
-                    {/*    onChange={handleChange('password')}*/}
-                    {/*/>*/}
                     <InputLabel htmlFor="standard-adornment-password">
                         Password
                     </InputLabel>
-                    <Input
-                        type={showPassword ? "text" : "password"}
-                        onChange={handleChange('password')}
-                        value={password}
-                        name="password"
-                        endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                >
-                                    {showPassword ? <Visibility/> : <VisibilityOff/>}
-                                </IconButton>
-                            </InputAdornment>
-                        }
-                        fullWidth
-                    />
+                    <div className={"meter"}>
+                        <Input
+                            type={showPassword ? "text" : "password"}
+                            onChange={handleChange('password')}
+                            value={password}
+                            autoComplete={"off"}
+                            name="password"
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                    >
+                                        {showPassword ? <Visibility/> : <VisibilityOff/>}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                            fullWidth
+                        />
+                        <PasswordChecker password={password}/>
+                    </div>
 
                     <TextField
                         variant="outlined"

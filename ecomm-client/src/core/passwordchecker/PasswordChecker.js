@@ -1,10 +1,9 @@
 import React from 'react'
 import zxcvbn from 'zxcvbn'
-import {makeStyles, useTheme} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import "./PasswordChecker.css"
-import {Typography} from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     password_strength_meter: {
         textAlign: "center"
     },

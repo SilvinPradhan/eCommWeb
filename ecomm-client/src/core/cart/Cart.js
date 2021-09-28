@@ -21,6 +21,7 @@ const Cart = () => {
                 {items.map((product, index) => {
                     return (
                         <Card key={index} product={product} showAddToCart={false} cartUpdate={true}
+                              displayViewProductButton={true}
                               showRemoveFromCart={true} setRun={setRun} run={run}></Card>
                     )
                 })}

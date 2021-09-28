@@ -98,7 +98,7 @@ const Shop = () => {
     const loadMoreButton = () => {
         return (
             size > 0 && size >= limit && (
-                <button onClick={loadMoreFilters} className="btn btn-warning mb-5">Show More <FontAwesomeIcon
+                <button onClick={loadMoreFilters} className="btn btn-warning mb-5">Load More Products<FontAwesomeIcon
                     icon={faCaretSquareDown}/>
                 </button>
             )

@@ -222,14 +222,14 @@ audience/customers. This is all possible with integrating `Mailchimp` which does
 3. In your Mailchimp navigate to your dashboard, and to your ‘Audience’ tab. You’ll need to make sure that you have your
    contact list initiated.
 4. Copy the HTML and extract the action from “Signup Forms > Embedded forms”. <br />
-   <img src="https://user-images.githubusercontent.com/52342206/127592052-66412e8c-6029-4cb5-a489-16a18ec92ad0.png" width="650" height="450" /> <br/>
+   <img src="https://user-images.githubusercontent.com/52342206/127592052-66412e8c-6029-4cb5-a489-16a18ec92ad0.png" width="550" height="350" /> <br/>
    `` Note:
    This ‘Signup Form’ can be navigated to from the Audience Tab, as well. While in ‘Embedded forms’ you’ll see the section in the right column ‘Copy/paste onto your site’. ``
 5. Do not copy the whole block of code, but the following string in `<form action="COPY_MAILCHIMP_URL" />` <br />
-   <img src="https://user-images.githubusercontent.com/52342206/127592130-326e5f17-e62f-47fa-a339-9dc4e392cde6.png" width="650" height="450" />
+   <img src="https://user-images.githubusercontent.com/52342206/127592130-326e5f17-e62f-47fa-a339-9dc4e392cde6.png" width="550" height="350" />
 6. In the client side directory, navigate to `.env` file and paste the copied string (COPY_MAILCHIMP_URL) into a new
    environment variable, i.e, REACT_APP_MAILCHIMP_URL='COPY_MAILCHIMP_URL'.<br/>
-   <img src="https://user-images.githubusercontent.com/52342206/127592403-9a514d02-a3f7-4b95-9c58-be8c590440f4.png" width="650" height="450" />
+   <img src="https://user-images.githubusercontent.com/52342206/127592403-9a514d02-a3f7-4b95-9c58-be8c590440f4.png" width="550" height="350" />
 7. Now, navigate to your NewsletterSubscriptionForm jsx file and build a form. You need to test making sure that all of
    your signups are hitting your Audience Contact list in MailChimp.
 8. To COPY a custom Newsletter Subscription Form that I built, navigate to -> `src/core/newsletter/NewsletterSubscribe`
@@ -253,9 +253,9 @@ What can we do with Google Analytics?
     * Fill up the required name and other details and provide the URL of your website. <br/>
     [ Important ] <br/>
     Be sure to click on the Advanced Settings and turn on the Create Universal
-   <img src="https://miro.medium.com/max/1400/1*cIfHIh_jnDAZdBZY5ZD2aQ.png" width="650" height="550"/>
+   <img src="https://miro.medium.com/max/1400/1*cIfHIh_jnDAZdBZY5ZD2aQ.png" width="580" height="350"/>
     * Then Select a property and get the tracking id and save it somewhere.
-   <img src="https://miro.medium.com/max/1400/1*Hj7AdusSGWj2152T2htKYQ.png" width="950" height="550"/>
+   <img src="https://miro.medium.com/max/1400/1*Hj7AdusSGWj2152T2htKYQ.png" width="580" height="350"/>
 3. Now you are done setting up your project in Google Analytics. If you have a live website you will start getting some insights about the visitors already.
 4. [React] Install Dependencies: 
     * First, install react-ga package from npm. It’s the official npm package for React integration with Google analytics. <br />

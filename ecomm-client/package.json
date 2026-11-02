@@ -13,7 +13,7 @@
     "braintree-web-drop-in-react": "1.2.1",
     "classnames": "2.3.1",
     "dompurify": "2.3.3",
-    "express": "4.17.1",
+    "express": "4.20.0",
     "isomorphic-fetch": "3.0.0",
     "moment": "2.29.1",
     "react": "17.0.2",
